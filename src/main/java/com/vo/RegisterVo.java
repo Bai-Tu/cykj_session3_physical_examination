@@ -12,5 +12,6 @@ public class RegisterVo {
     private String acc;
     private String pwd;
     private String age;
+    private String name;
     private String code;
 }

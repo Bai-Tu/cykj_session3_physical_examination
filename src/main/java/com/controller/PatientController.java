@@ -1,10 +1,13 @@
 package com.controller;
 
+import com.service.PatientService;
 import com.util.CheckCode;
 import com.util.ImageCodeUtils;
+import com.util.Md5;
 import com.util.ResponseDTO;
 import com.vo.LoginVo;
 import com.vo.RegisterVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,23 +30,18 @@ import java.util.HashMap;
 @RequestMapping("/patient")
 public class PatientController {
 
-    @ResponseBody
-    @RequestMapping("/refreshCheckCode")
-    public void refreshCheckCode(HttpServletResponse response, HttpSession session){
-        ImageCodeUtils imageCodeUtils = new ImageCodeUtils();
-        session.setAttribute("code",imageCodeUtils.getCode());
-        try {
-            imageCodeUtils.write(response.getOutputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    @Autowired
+    PatientService service;
+
+
 
     @ResponseBody
     @RequestMapping("/registerPatient")
     public ResponseDTO registerPatient(@RequestBody RegisterVo vo, HttpSession session){
         if (vo.getCode().equals(session.getAttribute("code"))){
-            return adminService.loginAdmin(vo);
+            String encrypted = Md5.getEncrypted(vo.getPwd());
+            vo.setPwd(encrypted);
+            return service.registerPatient(vo);
         }else {
             return new ResponseDTO(-2, "验证码错误", null);
         }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PhySubitemMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.PhySubitem">
+    <!--@mbg.generated-->
+    <!--@Table phy_subitem-->
+    <id column="subitem_id" jdbcType="INTEGER" property="subitemId" />
+    <result column="subitem_name" jdbcType="VARCHAR" property="subitemName" />
+    <result column="subitem_standard" jdbcType="VARCHAR" property="subitemStandard" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    subitem_id, subitem_name, subitem_standard
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from phy_subitem
+    where subitem_id = #{subitemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from phy_subitem
+    where subitem_id = #{subitemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.PhySubitem">
+    <!--@mbg.generated-->
+    insert into phy_subitem (subitem_id, subitem_name, subitem_standard
+      )
+    values (#{subitemId,jdbcType=INTEGER}, #{subitemName,jdbcType=VARCHAR}, #{subitemStandard,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.PhySubitem">
+    <!--@mbg.generated-->
+    insert into phy_subitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subitemId != null">
+        subitem_id,
+      </if>
+      <if test="subitemName != null">
+        subitem_name,
+      </if>
+      <if test="subitemStandard != null">
+        subitem_standard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subitemId != null">
+        #{subitemId,jdbcType=INTEGER},
+      </if>
+      <if test="subitemName != null">
+        #{subitemName,jdbcType=VARCHAR},
+      </if>
+      <if test="subitemStandard != null">
+        #{subitemStandard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.PhySubitem">
+    <!--@mbg.generated-->
+    update phy_subitem
+    <set>
+      <if test="subitemName != null">
+        subitem_name = #{subitemName,jdbcType=VARCHAR},
+      </if>
+      <if test="subitemStandard != null">
+        subitem_standard = #{subitemStandard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where subitem_id = #{subitemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.PhySubitem">
+    <!--@mbg.generated-->
+    update phy_subitem
+    set subitem_name = #{subitemName,jdbcType=VARCHAR},
+      subitem_standard = #{subitemStandard,jdbcType=VARCHAR}
+    where subitem_id = #{subitemId,jdbcType=INTEGER}
+  </update>
+</mapper>

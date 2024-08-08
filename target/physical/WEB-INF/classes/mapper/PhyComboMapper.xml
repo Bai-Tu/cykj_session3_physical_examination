@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PhyComboMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.PhyCombo">
+    <!--@mbg.generated-->
+    <!--@Table phy_combo-->
+    <id column="combo_id" jdbcType="INTEGER" property="comboId" />
+    <result column="combo_name" jdbcType="VARCHAR" property="comboName" />
+    <result column="combo_price" jdbcType="DECIMAL" property="comboPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    combo_id, combo_name, combo_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from phy_combo
+    where combo_id = #{comboId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from phy_combo
+    where combo_id = #{comboId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="combo_id" keyProperty="comboId" parameterType="com.pojo.PhyCombo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into phy_combo (combo_name, combo_price)
+    values (#{comboName,jdbcType=VARCHAR}, #{comboPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" keyColumn="combo_id" keyProperty="comboId" parameterType="com.pojo.PhyCombo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into phy_combo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="comboName != null">
+        combo_name,
+      </if>
+      <if test="comboPrice != null">
+        combo_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="comboName != null">
+        #{comboName,jdbcType=VARCHAR},
+      </if>
+      <if test="comboPrice != null">
+        #{comboPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.PhyCombo">
+    <!--@mbg.generated-->
+    update phy_combo
+    <set>
+      <if test="comboName != null">
+        combo_name = #{comboName,jdbcType=VARCHAR},
+      </if>
+      <if test="comboPrice != null">
+        combo_price = #{comboPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where combo_id = #{comboId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.PhyCombo">
+    <!--@mbg.generated-->
+    update phy_combo
+    set combo_name = #{comboName,jdbcType=VARCHAR},
+      combo_price = #{comboPrice,jdbcType=DECIMAL}
+    where combo_id = #{comboId,jdbcType=INTEGER}
+  </update>
+</mapper>

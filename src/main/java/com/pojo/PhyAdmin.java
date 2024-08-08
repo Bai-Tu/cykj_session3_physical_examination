@@ -1,77 +1,46 @@
 package com.pojo;
 
+import lombok.Data;
 
+/**
+ * @author 李璟瑜
+ * @date 2024/8/8 10:57
+ * @description:
+ */
+@Data
 public class PhyAdmin {
+    /**
+     * id
+     */
+    private Integer adminId;
 
-  private long adminId;
-  private String adminName;
-  private String adminAccount;
-  private String adminPassword;
-  private long adminRoleId;
-  private long adminDepartmentId;
-  private long adminStatus;
+    /**
+     * 管理员名
+     */
+    private String adminName;
 
+    /**
+     * 管理员账户
+     */
+    private String adminAccount;
 
-  public long getAdminId() {
-    return adminId;
-  }
+    /**
+     * 管理员密码
+     */
+    private String adminPassword;
 
-  public void setAdminId(long adminId) {
-    this.adminId = adminId;
-  }
+    /**
+     * 管理员身份
+     */
+    private Integer adminRoleId;
 
+    /**
+     * 管理员部门
+     */
+    private Integer adminDepartmentId;
 
-  public String getAdminName() {
-    return adminName;
-  }
-
-  public void setAdminName(String adminName) {
-    this.adminName = adminName;
-  }
-
-
-  public String getAdminAccount() {
-    return adminAccount;
-  }
-
-  public void setAdminAccount(String adminAccount) {
-    this.adminAccount = adminAccount;
-  }
-
-
-  public String getAdminPassword() {
-    return adminPassword;
-  }
-
-  public void setAdminPassword(String adminPassword) {
-    this.adminPassword = adminPassword;
-  }
-
-
-  public long getAdminRoleId() {
-    return adminRoleId;
-  }
-
-  public void setAdminRoleId(long adminRoleId) {
-    this.adminRoleId = adminRoleId;
-  }
-
-
-  public long getAdminDepartmentId() {
-    return adminDepartmentId;
-  }
-
-  public void setAdminDepartmentId(long adminDepartmentId) {
-    this.adminDepartmentId = adminDepartmentId;
-  }
-
-
-  public long getAdminStatus() {
-    return adminStatus;
-  }
-
-  public void setAdminStatus(long adminStatus) {
-    this.adminStatus = adminStatus;
-  }
-
+    /**
+     * 管理员状态1启用，0禁用
+     */
+    private Integer adminStatus;
 }
