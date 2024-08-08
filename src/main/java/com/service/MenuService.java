@@ -9,4 +9,6 @@ import com.util.ResponseDTO;
  */
 public interface MenuService {
     ResponseDTO searchMenuByRoleInTree(int roleId);
+    ResponseDTO getDifferenceTree(int roleId);
+    ResponseDTO searchMenuByRoleInEletree(int roleId);
 }

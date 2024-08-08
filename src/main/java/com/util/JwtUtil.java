@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class JwtUtil {
     private static final String privateKey = "aIQ41XOa8vSqvHIUZpW8fiwtFQDPoM4loR3iXkBfzMFOHEsLiZ4b7C6rLWobKyll";
-    private static final long expTime = 300000;
+    private static final long expTime = 30000000;
 
     public static String generateToken(Map<String,Object> claims){
         long nowTime = System.currentTimeMillis();

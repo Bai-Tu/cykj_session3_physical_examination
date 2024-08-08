@@ -1,10 +1,13 @@
 package com.mapper;
 
 import com.pojo.PhyDepartment;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author 李璟瑜
- * @date 2024/8/8 10:57
+ * @date 2024/8/8 15:20
  * @description:
  */
 public interface PhyDepartmentMapper {
@@ -19,4 +22,8 @@ public interface PhyDepartmentMapper {
     int updateByPrimaryKeySelective(PhyDepartment record);
 
     int updateByPrimaryKey(PhyDepartment record);
+
+    List<PhyDepartment> getAllDepartment();
+    int switchDepartmentStatus(@Param("id")int departmentId,@Param("status") int status);
+    List<PhyDepartment> getDepartmentInSearch(String departmentName);
 }

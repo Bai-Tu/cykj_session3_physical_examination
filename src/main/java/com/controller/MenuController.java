@@ -27,4 +27,19 @@ public class MenuController {
         ResponseDTO responseDTO = service.searchMenuByRoleInTree(role.getRoleId());
         return responseDTO;
     }
+
+    @ResponseBody
+    @RequestMapping("/getDifferentTree")
+    public ResponseDTO getDifferentTree(@RequestBody PhyRole role){
+        ResponseDTO responseDTO = service.getDifferenceTree(role.getRoleId());
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/searchMenuByRoleInEletree")
+    public ResponseDTO searchMenuByRoleInEletree(@RequestBody PhyRole role){
+        ResponseDTO responseDTO = service.searchMenuByRoleInEletree((int) role.getRoleId());
+        return responseDTO;
+    }
+
 }

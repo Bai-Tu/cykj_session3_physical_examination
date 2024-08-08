@@ -1,13 +1,17 @@
 package com.controller;
 
 import com.util.ImageCodeUtils;
+import com.util.JwtUtil;
+import com.util.ResponseDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author 李璟瑜
@@ -15,8 +19,8 @@ import java.io.IOException;
  * @description:
  */
 @Controller
-@RequestMapping("/code")
-public class CheckCodeController {
+@RequestMapping("/tool")
+public class ToolController {
     @ResponseBody
     @RequestMapping("/refreshCheckCode")
     public void refreshCheckCode(HttpServletResponse response, HttpSession session){
@@ -27,5 +31,12 @@ public class CheckCodeController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @ResponseBody
+    @RequestMapping("/parseToken")
+    public ResponseDTO parseToken(String token){
+        Map<String, Object> map = JwtUtil.parseToken(token);
+        return ResponseDTO.success(map);
     }
 }

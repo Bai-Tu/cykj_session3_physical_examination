@@ -22,4 +22,6 @@ public interface PhyMenuMapper {
 
     int updateByPrimaryKey(PhyMenu record);
     List<PhyMenu> searchMenuByRole(int roleId);
+    List<PhyMenu> searchAll();
+    List<PhyMenu> getDifferentTree(int roleId);
 }
