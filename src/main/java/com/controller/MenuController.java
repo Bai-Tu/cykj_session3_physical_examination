@@ -4,6 +4,7 @@ import com.mapper.PhyMenuMapper;
 import com.pojo.PhyRole;
 import com.service.MenuService;
 import com.util.ResponseDTO;
+import com.vo.AuthorityPermissionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,13 @@ public class MenuController {
     @RequestMapping("/searchMenuByRoleInEletree")
     public ResponseDTO searchMenuByRoleInEletree(@RequestBody PhyRole role){
         ResponseDTO responseDTO = service.searchMenuByRoleInEletree((int) role.getRoleId());
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/editMenuAuthority")
+    public ResponseDTO editMenuAuthority(@RequestBody AuthorityPermissionVo vo){
+        ResponseDTO responseDTO = service.editMenuAuthority(vo.getRoleId(), vo.getMenuData());
         return responseDTO;
     }
 

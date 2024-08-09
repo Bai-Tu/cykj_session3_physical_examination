@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.pojo.PhyAdmin;
 import com.service.AdminService;
 import com.util.ResponseDTO;
 import com.vo.LoginVo;
+import com.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,8 +33,22 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping("/getAllAdmin")
-    public ResponseDTO getAllAdmin(){
-        ResponseDTO responseDTO = service.getAllAdmin();
+    public ResponseDTO getAllAdmin(@RequestBody PageVo vo){
+        ResponseDTO responseDTO = service.getAllAdmin(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/resetPwd")
+    public ResponseDTO resetPwd(@RequestBody PhyAdmin vo){
+        ResponseDTO responseDTO = service.resetPwd(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/addAdmin")
+    public ResponseDTO addAdmin(@RequestBody PhyAdmin vo){
+        ResponseDTO responseDTO = service.addAdmin(vo);
         return responseDTO;
     }
 

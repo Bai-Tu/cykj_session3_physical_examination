@@ -1,7 +1,10 @@
 package com.service;
 
+import com.github.pagehelper.Page;
+import com.pojo.PhyAdmin;
 import com.util.ResponseDTO;
 import com.vo.LoginVo;
+import com.vo.PageVo;
 
 /**
  * @author 李璟瑜
@@ -10,5 +13,7 @@ import com.vo.LoginVo;
  */
 public interface AdminService {
     ResponseDTO adminLogin(LoginVo vo);
-    ResponseDTO getAllAdmin();
+    ResponseDTO getAllAdmin(PageVo vo);
+    ResponseDTO resetPwd(PhyAdmin admin);
+    ResponseDTO addAdmin(PhyAdmin admin);
 }

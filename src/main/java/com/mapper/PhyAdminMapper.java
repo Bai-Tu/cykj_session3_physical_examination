@@ -27,5 +27,7 @@ public interface PhyAdminMapper {
     List<PhyAdmin> selectAll();
     List<PhyRole> getAllRole();
     List<PhyDepartment> getAllDepartment();
+    List<PhyAdmin> selectAllByAdminAccount(@Param("adminAccount")String adminAccount);
+
 
 }

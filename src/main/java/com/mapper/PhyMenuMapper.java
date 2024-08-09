@@ -26,6 +26,6 @@ public interface PhyMenuMapper {
     List<PhyMenu> searchAllNotHidden();
     List<PhyMenu> getDifferentTree(int roleId);
     List<PhyMenu> selectAll();
-
+    int deletePermissionByRoleId(int roleId);
 
 }

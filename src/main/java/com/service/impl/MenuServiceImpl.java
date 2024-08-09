@@ -1,13 +1,16 @@
 package com.service.impl;
 
 import com.mapper.PhyMenuMapper;
+import com.mapper.PhyPermissionMapper;
 import com.pojo.MenuTree;
 import com.pojo.PhyMenu;
+import com.pojo.PhyPermission;
 import com.service.MenuService;
 import com.util.ListInTree;
 import com.util.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     PhyMenuMapper mapper;
+
+    @Autowired
+    PhyPermissionMapper permissionMapper;
+
     @Override
     public ResponseDTO searchMenuByRoleInTree(int roleId) {
         List<PhyMenu> phyMenus = mapper.searchMenuByRole(roleId);
@@ -104,5 +111,23 @@ public class MenuServiceImpl implements MenuService {
             }
         }
         return ResponseDTO.success(menuData);
+    }
+
+    @Override
+    @Transactional
+    public ResponseDTO editMenuAuthority(int roleId, List<MenuTree> menuList) {
+        try {
+            ArrayList<MenuTree> menuTrees = ListInTree.flattenTree(menuList);
+            int i = mapper.deletePermissionByRoleId(roleId);
+            for (MenuTree tree : menuTrees) {
+                PhyPermission permission = new PhyPermission();
+                permission.setRoleId(roleId);
+                permission.setMenuId(Integer.valueOf(tree.getId()));
+                permissionMapper.insertSelective(permission);
+            }
+        } catch (NumberFormatException e) {
+            return ResponseDTO.fail();
+        }
+        return ResponseDTO.success();
     }
 }

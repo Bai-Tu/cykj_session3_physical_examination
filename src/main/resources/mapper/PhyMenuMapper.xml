@@ -185,4 +185,7 @@
     select * from phy_menu
   </select>
 
+  <delete id="deletePermissionByRoleId">
+    delete from phy_permission where role_id = #{roleId}
+  </delete>
 </mapper>
