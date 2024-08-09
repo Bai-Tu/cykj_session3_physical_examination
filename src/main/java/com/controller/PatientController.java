@@ -33,8 +33,6 @@ public class PatientController {
     @Autowired
     PatientService service;
 
-
-
     @ResponseBody
     @RequestMapping("/registerPatient")
     public ResponseDTO registerPatient(@RequestBody RegisterVo vo, HttpSession session){
@@ -46,4 +44,14 @@ public class PatientController {
             return new ResponseDTO(-2, "验证码错误", null);
         }
     }
+
+    @ResponseBody
+    @RequestMapping("/loginPatient")
+    public ResponseDTO loginPatient(@RequestBody LoginVo vo) {
+        String encrypted = Md5.getEncrypted(vo.getPwd());
+        vo.setPwd(encrypted);
+        ResponseDTO responseDTO = service.loginPatient(vo);
+        return responseDTO;
+    }
+
 }

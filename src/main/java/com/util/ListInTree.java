@@ -1,5 +1,6 @@
 package com.util;
 
+import com.pojo.MenuTree;
 import com.pojo.PhyMenu;
 
 import java.util.ArrayList;
@@ -30,5 +31,17 @@ public class ListInTree {
             }
         }
         return nowMenu;
+    }
+
+    public static ArrayList<MenuTree> flattenTree(List<MenuTree> treeMenuList) {
+        ArrayList<MenuTree> flattenedMenuList = new ArrayList<>();
+        for (MenuTree treeMenu : treeMenuList) {
+            flattenedMenuList.add(treeMenu);
+            if (treeMenu.getChildren() != null) {
+                List<MenuTree> flattenedChildren = flattenTree(treeMenu.getChildren());
+                flattenedMenuList.addAll(flattenedChildren);
+            }
+        }
+        return flattenedMenuList;
     }
 }

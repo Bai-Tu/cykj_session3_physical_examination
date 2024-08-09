@@ -1,4 +1,5 @@
 package com.mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.pojo.PhyMenu;
 
@@ -22,6 +23,9 @@ public interface PhyMenuMapper {
 
     int updateByPrimaryKey(PhyMenu record);
     List<PhyMenu> searchMenuByRole(int roleId);
-    List<PhyMenu> searchAll();
+    List<PhyMenu> searchAllNotHidden();
     List<PhyMenu> getDifferentTree(int roleId);
+    List<PhyMenu> selectAll();
+
+
 }

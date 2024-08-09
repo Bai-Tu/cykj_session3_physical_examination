@@ -3,6 +3,7 @@ package com.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mapper.PhyDepartmentMapper;
+import com.pojo.PhyAdmin;
 import com.pojo.PhyDepartment;
 import com.service.DepartmentService;
 import com.util.ResponseDTO;
@@ -38,10 +39,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     /*
     * 修改科室状态
     * */
-
     @Override
     public ResponseDTO switchDepartmentStatus(PhyDepartment department) {
         int i = 0;
+        List<PhyAdmin> phyAdmins = mapper.selectAdminByDepartmentId(department.getDepartmentId());
+        if (phyAdmins.size()!=0){
+            return new ResponseDTO(-2,"还有医生",null);
+        }
+
         if (department.getDepartmentStatus() == 1){
             i = mapper.switchDepartmentStatus(department.getDepartmentId(), 0);
         }else {
@@ -63,5 +68,33 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<PhyDepartment> departmentInSearch = mapper.getDepartmentInSearch(vo.getDepartmentName());
         PageInfo<PhyDepartment> pageInfo = new PageInfo<>(departmentInSearch);
         return ResponseDTO.success(pageInfo);
+    }
+
+    /*
+    * 添加科室
+    * */
+    @Override
+    public ResponseDTO addDepartment(PhyDepartment department) {
+        List<PhyDepartment> phyDepartments = mapper.selectByDepartmentName(department.getDepartmentName());
+        if (phyDepartments.size() == 0){
+            int insert = mapper.insert(department);
+            if (insert > 0){
+                return ResponseDTO.success();
+            }else {
+                return ResponseDTO.fail();
+            }
+        }else {
+            return new ResponseDTO(-100,"已存在",null);
+        }
+    }
+
+    @Override
+    public ResponseDTO editDepartment(PhyDepartment department) {
+        int i = mapper.updateByPrimaryKeySelective(department);
+        if (i>0){
+            return ResponseDTO.success();
+        }else {
+            return ResponseDTO.fail();
+        }
     }
 }

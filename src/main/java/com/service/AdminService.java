@@ -10,4 +10,5 @@ import com.vo.LoginVo;
  */
 public interface AdminService {
     ResponseDTO adminLogin(LoginVo vo);
+    ResponseDTO getAllAdmin();
 }

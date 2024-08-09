@@ -1,4 +1,6 @@
 package com.mapper;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import com.pojo.PhyPatient;
 import com.vo.RegisterVo;
@@ -19,7 +21,11 @@ public interface PhyPatientMapper {
 
     int updateByPrimaryKeySelective(PhyPatient record);
 
-    int updateByPrimaryKey(PhyPatient record);
+    List<PhyPatient> selectAllByPatientIdentityOrPatientPhoneAndPatientPassword(@Param("patientIdentity")String patientIdentity,@Param("patientPhone")String patientPhone,@Param("patientPassword")String patientPassword);
+
+
+
+
     //通过电话查询病人
     PhyPatient searchPatientByPhone(String phone);
     //根据身份证查询病人

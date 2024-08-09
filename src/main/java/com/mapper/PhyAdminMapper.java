@@ -1,6 +1,9 @@
 package com.mapper;
+import java.util.List;
 
 import com.pojo.PhyAdmin;
+import com.pojo.PhyDepartment;
+import com.pojo.PhyRole;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -21,4 +24,8 @@ public interface PhyAdminMapper {
 
     int updateByPrimaryKey(PhyAdmin record);
     PhyAdmin loginAdmin(@Param("acc") String acc, @Param("pwd") String pwd);
+    List<PhyAdmin> selectAll();
+    List<PhyRole> getAllRole();
+    List<PhyDepartment> getAllDepartment();
+
 }

@@ -4,9 +4,12 @@ import com.mapper.PhyPatientMapper;
 import com.pojo.PhyPatient;
 import com.service.PatientService;
 import com.util.ResponseDTO;
+import com.vo.LoginVo;
 import com.vo.RegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author 李璟瑜
@@ -45,6 +48,16 @@ public class PatientServiceImpl implements PatientService {
             }else {
                 return new ResponseDTO(-1,"账号已存在",null);
             }
+        }
+    }
+
+    @Override
+    public ResponseDTO loginPatient(LoginVo vo) {
+        List<PhyPatient> phyPatients = mapper.selectAllByPatientIdentityOrPatientPhoneAndPatientPassword(vo.getAcc(), vo.getAcc(), vo.getPwd());
+        if (phyPatients.size()!=0){
+            return ResponseDTO.success(phyPatients.get(0));
+        }else {
+            return ResponseDTO.fail();
         }
     }
 }

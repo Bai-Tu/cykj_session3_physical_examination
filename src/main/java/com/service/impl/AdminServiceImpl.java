@@ -2,6 +2,8 @@ package com.service.impl;
 
 import com.mapper.PhyAdminMapper;
 import com.pojo.PhyAdmin;
+import com.pojo.PhyDepartment;
+import com.pojo.PhyRole;
 import com.service.AdminService;
 import com.util.JwtUtil;
 import com.util.Md5;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author 李璟瑜
@@ -29,6 +32,12 @@ public class AdminServiceImpl implements AdminService {
         if (phyAdmin != null){
             if (phyAdmin.getAdminStatus() == 1){
                 HashMap<String,Object> data = new HashMap<>();
+                List<PhyRole> allRole = mapper.getAllRole();
+                data.put("roleList",allRole);
+
+                List<PhyDepartment> allDepartment = mapper.getAllDepartment();
+                data.put("departmentList",allDepartment);
+
                 data.put("adminInfo",phyAdmin);
                 String token = JwtUtil.generateToken(data);
                 return ResponseDTO.success(token);
@@ -38,5 +47,11 @@ public class AdminServiceImpl implements AdminService {
 
         }
         return ResponseDTO.fail();
+    }
+
+    @Override
+    public ResponseDTO getAllAdmin() {
+        List<PhyAdmin> phyAdmins = mapper.selectAll();
+        return ResponseDTO.success(phyAdmins);
     }
 }

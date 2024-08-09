@@ -43,7 +43,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/tool"/>
+            <mvc:exclude-mapping path="/tool/*"/>
             <mvc:exclude-mapping path="/admin/adminLogin"/>
             <bean class="com.interceptor.LoginInterceptor"/>
         </mvc:interceptor>

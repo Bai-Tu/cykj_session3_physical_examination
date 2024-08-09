@@ -165,18 +165,24 @@
     phy_menu.menu_id = phy_permission.menu_id
     WHERE
     phy_permission.role_id = #{roleId}
+    and phy_menu.menu_status = 1
     ORDER BY
     phy_menu.menu_id;
     </select>
 
-  <select id="searchAll" resultMap="BaseResultMap">
-    select * from phy_menu
+  <select id="searchAllNotHidden" resultMap="BaseResultMap">
+    select * from phy_menu where menu_status = 1
   </select>
 
   <select id="getDifferentTree" resultMap="BaseResultMap">
     SELECT * FROM phy_menu
     LEFT JOIN phy_permission p1 ON phy_menu.menu_id = p1.menu_id AND p1.role_id = 1
     LEFT JOIN phy_permission p2 ON phy_menu.menu_id = p2.menu_id AND p2.role_id = #{roleId}
-    WHERE p1.menu_id IS NOT NULL AND p2.menu_id IS NULL
+    WHERE p1.menu_id IS NOT NULL AND p2.menu_id IS NULL AND phy_menu.menu_status = 1
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from phy_menu
+  </select>
+
 </mapper>

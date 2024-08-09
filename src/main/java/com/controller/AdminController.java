@@ -29,4 +29,11 @@ public class AdminController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/getAllAdmin")
+    public ResponseDTO getAllAdmin(){
+        ResponseDTO responseDTO = service.getAllAdmin();
+        return responseDTO;
+    }
+
 }

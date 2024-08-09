@@ -1,6 +1,8 @@
 package com.service;
 
+import com.pojo.PhyPatient;
 import com.util.ResponseDTO;
+import com.vo.LoginVo;
 import com.vo.RegisterVo;
 
 /**
@@ -10,4 +12,5 @@ import com.vo.RegisterVo;
  */
 public interface PatientService {
     ResponseDTO registerPatient (RegisterVo vo);
+    ResponseDTO loginPatient(LoginVo vo);
 }

@@ -36,7 +36,7 @@ public class MenuServiceImpl implements MenuService {
         ArrayList<MenuTree> menuData = new ArrayList<>();
         List<PhyMenu> mixList = new ArrayList<>();
         List<PhyMenu> differentMenu = mapper.getDifferentTree(roleId);
-        List<PhyMenu> Menus = mapper.searchAll();
+        List<PhyMenu> Menus = mapper.searchAllNotHidden();
         Map<Integer, PhyMenu> collect = Menus.stream().collect(Collectors.toMap(PhyMenu::getMenuId, CyMenu -> CyMenu));
 
         for (PhyMenu menu : differentMenu) {
@@ -80,7 +80,7 @@ public class MenuServiceImpl implements MenuService {
     public ResponseDTO searchMenuByRoleInEletree(int roleId) {
         ArrayList<MenuTree> menuData = new ArrayList<>();
         List<PhyMenu> cyMenus = mapper.searchMenuByRole(roleId);
-        List<PhyMenu> allMenu = mapper.searchAll();
+        List<PhyMenu> allMenu = mapper.searchAllNotHidden();
         List<PhyMenu> mixList = new ArrayList<>();
         Map<Integer, PhyMenu> collect = allMenu.stream().collect(Collectors.toMap(PhyMenu::getMenuId, CyMenu -> CyMenu));
         for (PhyMenu menu : cyMenus) {

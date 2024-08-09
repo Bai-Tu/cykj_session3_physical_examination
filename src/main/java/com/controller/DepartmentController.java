@@ -43,4 +43,18 @@ public class DepartmentController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/addDepartment")
+    public ResponseDTO addDepartment(@RequestBody PhyDepartment vo){
+        ResponseDTO responseDTO = service.addDepartment(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/editDepartment")
+    public ResponseDTO editDepartment(@RequestBody PhyDepartment vo){
+        ResponseDTO responseDTO = service.editDepartment(vo);
+        return responseDTO;
+    }
+
 }
