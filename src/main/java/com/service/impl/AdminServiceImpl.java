@@ -3,11 +3,14 @@ package com.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mapper.PhyAdminMapper;
+import com.mapper.PhyMenuMapper;
 import com.pojo.PhyAdmin;
 import com.pojo.PhyDepartment;
+import com.pojo.PhyMenu;
 import com.pojo.PhyRole;
 import com.service.AdminService;
 import com.util.JwtUtil;
+import com.util.ListInTree;
 import com.util.Md5;
 import com.util.ResponseDTO;
 import com.vo.LoginVo;
@@ -15,6 +18,7 @@ import com.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +32,22 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     PhyAdminMapper mapper;
+    @Autowired
+    PhyMenuMapper menuMapper;
+
+    @Override
+    public ResponseDTO getAdminOtherInfo(int roleId) {
+        HashMap<String,Object> data = new HashMap<>();
+        List<PhyRole> allRole = mapper.getAllRole();
+        data.put("roleList",allRole);
+        List<PhyDepartment> allDepartment = mapper.getAllDepartment();
+        data.put("departmentList",allDepartment);
+        List<PhyMenu> phyMenus = menuMapper.searchMenuByRole(roleId);
+        ArrayList<PhyMenu> phyMenusInTree = ListInTree.turnToTree(phyMenus);
+        data.put("menuList",phyMenusInTree);
+        return ResponseDTO.success(data);
+    }
+
     @Override
     public ResponseDTO adminLogin(LoginVo vo) {
         String encrypted = Md5.getEncrypted(vo.getPwd());
@@ -35,11 +55,6 @@ public class AdminServiceImpl implements AdminService {
         if (phyAdmin != null){
             if (phyAdmin.getAdminStatus() == 1){
                 HashMap<String,Object> data = new HashMap<>();
-                List<PhyRole> allRole = mapper.getAllRole();
-                data.put("roleList",allRole);
-
-                List<PhyDepartment> allDepartment = mapper.getAllDepartment();
-                data.put("departmentList",allDepartment);
 
                 data.put("adminInfo",phyAdmin);
                 String token = JwtUtil.generateToken(data);
@@ -83,5 +98,16 @@ public class AdminServiceImpl implements AdminService {
             return ResponseDTO.success();
         }
         return ResponseDTO.fail();
+    }
+
+    @Override
+    public ResponseDTO editAdmin(PhyAdmin admin) {
+        int i = mapper.updateByPrimaryKeySelective(admin);
+        if (i>0){
+            return ResponseDTO.success();
+        }else {
+            return ResponseDTO.fail();
+        }
+
     }
 }

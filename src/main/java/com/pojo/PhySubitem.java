@@ -1,26 +1,38 @@
 package com.pojo;
 
+
 import lombok.Data;
 
-/**
- * @author 李璟瑜
- * @date 2024/8/8 10:57
- * @description:
- */
 @Data
 public class PhySubitem {
-    /**
-    * id
-    */
-    private Integer subitemId;
+  /**
+   * id
+   */
+  private Integer subitemId;
 
-    /**
-    * 名字
-    */
-    private String subitemName;
+  /**
+   * 名字
+   */
+  private String subitemName;
 
-    /**
-    * 标准值
-    */
-    private String subitemStandard;
+  /**
+   * 标准值最小
+   */
+  private String subitemStandardMin;
+
+  /**
+   * 标准值最大
+   */
+  private String subitemStandardMax;
+
+  /**
+   * 单位
+   */
+  private String subitemUnit;
+
+  /**
+   * 状态  1开启 0隐藏
+   */
+  private Integer subitemStatus;
+
 }

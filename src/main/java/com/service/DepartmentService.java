@@ -2,7 +2,7 @@ package com.service;
 
 import com.pojo.PhyDepartment;
 import com.util.ResponseDTO;
-import com.vo.DepartmentPageVo;
+import com.vo.SearchPageVo;
 import com.vo.PageVo;
 
 /**
@@ -13,7 +13,7 @@ import com.vo.PageVo;
 public interface DepartmentService {
     ResponseDTO getAllDepartment(PageVo vo);
     ResponseDTO switchDepartmentStatus(PhyDepartment department);
-    ResponseDTO getDepartmentInSearch(DepartmentPageVo vo);
+    ResponseDTO getDepartmentInSearch(SearchPageVo vo);
     ResponseDTO addDepartment(PhyDepartment department);
     ResponseDTO editDepartment(PhyDepartment department);
 }

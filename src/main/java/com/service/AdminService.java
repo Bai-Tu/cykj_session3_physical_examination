@@ -16,4 +16,6 @@ public interface AdminService {
     ResponseDTO getAllAdmin(PageVo vo);
     ResponseDTO resetPwd(PhyAdmin admin);
     ResponseDTO addAdmin(PhyAdmin admin);
+    ResponseDTO editAdmin(PhyAdmin admin);
+    ResponseDTO getAdminOtherInfo(int roleId);
 }

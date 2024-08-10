@@ -52,4 +52,18 @@ public class AdminController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/editAdmin")
+    public ResponseDTO editAdmin(@RequestBody PhyAdmin vo){
+        ResponseDTO responseDTO = service.editAdmin(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getAdminOtherInfo")
+    public ResponseDTO getAdminOtherInfo(@RequestBody PhyAdmin role){
+        ResponseDTO responseDTO = service.getAdminOtherInfo(role.getAdminRoleId());
+        return responseDTO;
+    }
+
 }

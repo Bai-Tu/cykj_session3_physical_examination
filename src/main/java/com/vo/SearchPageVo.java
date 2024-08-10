@@ -8,8 +8,8 @@ import lombok.Data;
  * @description:
  */
 @Data
-public class DepartmentPageVo {
+public class SearchPageVo {
     private int pagen;
     private int limit;
-    private String departmentName;
+    private String name;
 }

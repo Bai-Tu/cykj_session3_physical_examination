@@ -3,7 +3,7 @@ package com.controller;
 import com.pojo.PhyDepartment;
 import com.service.DepartmentService;
 import com.util.ResponseDTO;
-import com.vo.DepartmentPageVo;
+import com.vo.SearchPageVo;
 import com.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class DepartmentController {
 
     @ResponseBody
     @RequestMapping("/getDepartmentInSearch")
-    public ResponseDTO getDepartmentInSearch(@RequestBody DepartmentPageVo vo){
+    public ResponseDTO getDepartmentInSearch(@RequestBody SearchPageVo vo){
         ResponseDTO responseDTO = service.getDepartmentInSearch(vo);
         return responseDTO;
     }

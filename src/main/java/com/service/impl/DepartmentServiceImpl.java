@@ -7,7 +7,7 @@ import com.pojo.PhyAdmin;
 import com.pojo.PhyDepartment;
 import com.service.DepartmentService;
 import com.util.ResponseDTO;
-import com.vo.DepartmentPageVo;
+import com.vo.SearchPageVo;
 import com.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,9 +63,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     * 模糊搜索科室
     * */
     @Override
-    public ResponseDTO getDepartmentInSearch(DepartmentPageVo vo) {
+    public ResponseDTO getDepartmentInSearch(SearchPageVo vo) {
         PageHelper.startPage(vo.getPagen(), vo.getLimit());
-        List<PhyDepartment> departmentInSearch = mapper.getDepartmentInSearch(vo.getDepartmentName());
+        List<PhyDepartment> departmentInSearch = mapper.getDepartmentInSearch(vo.getName());
         PageInfo<PhyDepartment> pageInfo = new PageInfo<>(departmentInSearch);
         return ResponseDTO.success(pageInfo);
     }

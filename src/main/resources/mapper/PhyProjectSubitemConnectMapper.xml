@@ -69,4 +69,7 @@
       subitem_id = #{subitemId,jdbcType=INTEGER}
     where project_subitem_connect_id = #{projectSubitemConnectId,jdbcType=INTEGER}
   </update>
+  <select id="selectAllBySubitemId" resultMap="BaseResultMap">
+    select * from phy_project_subitem_connect where subitem_id = #{id}
+  </select>
 </mapper>

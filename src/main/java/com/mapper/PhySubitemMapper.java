@@ -2,6 +2,8 @@ package com.mapper;
 
 import com.pojo.PhySubitem;
 
+import java.util.List;
+
 /**
  * @author 李璟瑜
  * @date 2024/8/8 10:57
@@ -19,4 +21,10 @@ public interface PhySubitemMapper {
     int updateByPrimaryKeySelective(PhySubitem record);
 
     int updateByPrimaryKey(PhySubitem record);
+
+    List<PhySubitem> getAllSubitem();
+    int insertSubitem(PhySubitem subitem);
+    List<PhySubitem> getSubitemByName(String name);
+    int editSubitem(PhySubitem subitem);
+    List<PhySubitem> getBySubitemNameInSearch(String name);
 }
