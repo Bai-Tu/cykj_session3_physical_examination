@@ -20,6 +20,12 @@
     from phy_project
     where project_id = #{projectId,jdbcType=INTEGER}
   </select>
+    <select id="getAllProject" resultType="com.pojo.PhyProject">
+      select * from phy_project
+    </select>
+  <select id="selectAllByProjectName" resultType="com.pojo.PhyProject">
+    select * from phy_project where project_name like concat('%',#{name},'%')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from phy_project

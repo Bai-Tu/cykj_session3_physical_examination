@@ -72,4 +72,9 @@
   <select id="selectAllBySubitemId" resultMap="BaseResultMap">
     select * from phy_project_subitem_connect where subitem_id = #{id}
   </select>
+  <select id="selectAllByProjectId" resultType="com.pojo.PhySubitem">
+    SELECT phy_subitem.subitem_id,phy_subitem.subitem_name
+    FROM phy_subitem,phy_project_subitem_connect
+    WHERE phy_subitem.subitem_id = phy_project_subitem_connect.subitem_id AND phy_project_subitem_connect.project_id = #{id};
+  </select>
 </mapper>

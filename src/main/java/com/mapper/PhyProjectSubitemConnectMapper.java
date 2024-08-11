@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.pojo.PhyProjectSubitemConnect;
+import com.pojo.PhySubitem;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface PhyProjectSubitemConnectMapper {
 
     int updateByPrimaryKey(PhyProjectSubitemConnect record);
     List<PhyProjectSubitemConnect> selectAllBySubitemId(int id);
+    List<PhySubitem> selectAllByProjectId(int id);
 }
