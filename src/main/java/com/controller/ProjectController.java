@@ -1,7 +1,7 @@
 package com.controller;
 
+import com.pojo.PhyProject;
 import com.service.ProjectService;
-import com.service.impl.ProjectServiceImpl;
 import com.util.ResponseDTO;
 import com.vo.PageVo;
 import com.vo.SearchPageVo;
@@ -33,7 +33,28 @@ public class ProjectController {
     @ResponseBody
     @RequestMapping("/searchProject")
     public ResponseDTO searchProject(@RequestBody SearchPageVo vo){
-        ResponseDTO responseDTO = service.searchProjectByName(vo);
+        ResponseDTO responseDTO = service.searchProject(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/addProject")
+    public ResponseDTO addProject(@RequestBody PhyProject vo){
+        ResponseDTO responseDTO = service.addProject(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/editProject")
+    public ResponseDTO editProject(@RequestBody PhyProject vo){
+        ResponseDTO responseDTO = service.editProject(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/switchProjectStatus")
+    public ResponseDTO switchProjectStatus(@RequestBody PhyProject vo){
+        ResponseDTO responseDTO = service.switchProjectStatus(vo);
         return responseDTO;
     }
 

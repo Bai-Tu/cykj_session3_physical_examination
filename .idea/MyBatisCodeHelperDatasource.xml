@@ -168,6 +168,8 @@
                   <option name="javaModelName" value="PhyProject" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>

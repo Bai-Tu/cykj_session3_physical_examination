@@ -1,12 +1,14 @@
 package com.mapper;
 
 import com.pojo.PhyProject;
+import com.pojo.PhyProjectSubitemConnect;
+import com.vo.SearchPageVo;
 
 import java.util.List;
 
 /**
  * @author 李璟瑜
- * @date 2024/8/8 10:57
+ * @date 2024/8/12 14:11
  * @description:
  */
 public interface PhyProjectMapper {
@@ -21,6 +23,10 @@ public interface PhyProjectMapper {
     int updateByPrimaryKeySelective(PhyProject record);
 
     int updateByPrimaryKey(PhyProject record);
+
     List<PhyProject> getAllProject();
+
     List<PhyProject> selectAllByProjectName(String name);
+    List<PhyProjectSubitemConnect> getProSubConnect(int projectId);
+    List<PhyProject> selectAllByNameAndPrice(SearchPageVo vo);
 }

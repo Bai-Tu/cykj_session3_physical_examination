@@ -27,4 +27,6 @@ public interface PhySubitemMapper {
     List<PhySubitem> getSubitemByName(String name);
     int editSubitem(PhySubitem subitem);
     List<PhySubitem> getBySubitemNameInSearch(String name);
+    List<PhySubitem> getDiffSubitem(int projectId);
+
 }
