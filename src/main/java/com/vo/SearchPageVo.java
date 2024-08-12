@@ -12,4 +12,6 @@ public class SearchPageVo {
     private int pagen;
     private int limit;
     private String name;
+    private float lowPrice;
+    private float highPrice;
 }

@@ -24,4 +24,5 @@ public interface PhyProjectSubitemConnectMapper {
     int updateByPrimaryKey(PhyProjectSubitemConnect record);
     List<PhyProjectSubitemConnect> selectAllBySubitemId(int id);
     List<PhySubitem> selectAllByProjectId(int id);
+    int deleteByProjectId(int projectId);
 }

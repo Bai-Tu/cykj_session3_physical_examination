@@ -8,10 +8,11 @@
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="project_price" jdbcType="DECIMAL" property="projectPrice" />
     <result column="project_status" jdbcType="INTEGER" property="projectStatus" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    project_id, project_name, project_price, project_status
+    project_id, project_name, project_price, project_status, department_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -20,12 +21,6 @@
     from phy_project
     where project_id = #{projectId,jdbcType=INTEGER}
   </select>
-    <select id="getAllProject" resultType="com.pojo.PhyProject">
-      select * from phy_project
-    </select>
-  <select id="selectAllByProjectName" resultType="com.pojo.PhyProject">
-    select * from phy_project where project_name like concat('%',#{name},'%')
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from phy_project
@@ -33,10 +28,10 @@
   </delete>
   <insert id="insert" keyColumn="project_id" keyProperty="projectId" parameterType="com.pojo.PhyProject" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into phy_project (project_name, project_price, project_status
-      )
-    values (#{projectName,jdbcType=VARCHAR}, #{projectPrice,jdbcType=DECIMAL}, #{projectStatus,jdbcType=INTEGER}
-      )
+    insert into phy_project (project_name, project_price, project_status, 
+      department_id)
+    values (#{projectName,jdbcType=VARCHAR}, #{projectPrice,jdbcType=DECIMAL}, #{projectStatus,jdbcType=INTEGER}, 
+      #{departmentId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="project_id" keyProperty="projectId" parameterType="com.pojo.PhyProject" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -51,6 +46,9 @@
       <if test="projectStatus != null">
         project_status,
       </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="projectName != null">
@@ -61,6 +59,9 @@
       </if>
       <if test="projectStatus != null">
         #{projectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -77,6 +78,9 @@
       <if test="projectStatus != null">
         project_status = #{projectStatus,jdbcType=INTEGER},
       </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
     </set>
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
@@ -85,7 +89,33 @@
     update phy_project
     set project_name = #{projectName,jdbcType=VARCHAR},
       project_price = #{projectPrice,jdbcType=DECIMAL},
-      project_status = #{projectStatus,jdbcType=INTEGER}
+      project_status = #{projectStatus,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER}
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
+    <select id="getAllProject" resultType="com.pojo.PhyProject">
+      select * from phy_project
+    </select>
+  <select id="selectAllByProjectName" resultType="com.pojo.PhyProject">
+    select * from phy_project where project_name like concat('%',#{name},'%')
+  </select>
+
+  <select id="getProSubConnect" resultType="com.pojo.PhyProjectSubitemConnect">
+    select * from phy_project_subitem_connect where project_id = #{projectId}
+  </select>
+
+  <select id="selectAllByNameAndPrice" resultMap="BaseResultMap">
+    select * from phy_project
+    <where>
+      <if test="name != null and name != ''">
+        and project_name like concat('%',#{name,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="highPrice != null">
+        and project_price &lt;= #{highPrice}
+      </if>
+      <if test="lowPrice != null">
+        and project_price >= #{lowPrice}
+      </if>
+    </where>
+  </select>
 </mapper>

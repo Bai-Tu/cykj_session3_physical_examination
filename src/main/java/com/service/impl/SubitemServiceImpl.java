@@ -79,4 +79,16 @@ public class SubitemServiceImpl implements SubitemService {
             return ResponseDTO.success();
         }
     }
+
+    @Override
+    public ResponseDTO getAllSubitemNoVo() {
+        List<PhySubitem> allSubitem = mapper.getAllSubitem();
+        return ResponseDTO.success(allSubitem);
+    }
+
+    @Override
+    public ResponseDTO getDiffSubitem(int projectId) {
+        List<PhySubitem> diffSubitem = mapper.getDiffSubitem(projectId);
+        return ResponseDTO.success(diffSubitem);
+    }
 }

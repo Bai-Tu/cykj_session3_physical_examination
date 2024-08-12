@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.pojo.PhyProject;
 import com.pojo.PhySubitem;
 import com.service.SubitemService;
 import com.util.ResponseDTO;
@@ -56,5 +57,20 @@ public class SubitemController {
         ResponseDTO responseDTO = service.editSubitemStatus(subitem);
         return responseDTO;
     }
+
+    @ResponseBody
+    @RequestMapping("/getDiffSubitem")
+    public ResponseDTO getDiffSubitem(@RequestBody PhyProject project){
+        ResponseDTO responseDTO = service.getDiffSubitem(project.getProjectId());
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getAllSubitemNoVo")
+    public ResponseDTO getAllSubitemNoVo(){
+        ResponseDTO responseDTO = service.getAllSubitemNoVo();
+        return responseDTO;
+    }
+
 
 }

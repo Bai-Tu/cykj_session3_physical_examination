@@ -3,7 +3,6 @@
 <mapper namespace="com.mapper.PhyProjectSubitemConnectMapper">
   <resultMap id="BaseResultMap" type="com.pojo.PhyProjectSubitemConnect">
     <!--@mbg.generated-->
-    <!--@Table phy_project_subitem_connect-->
     <id column="project_subitem_connect_id" jdbcType="INTEGER" property="projectSubitemConnectId" />
     <result column="project_id" jdbcType="INTEGER" property="projectId" />
     <result column="subitem_id" jdbcType="INTEGER" property="subitemId" />
@@ -77,4 +76,8 @@
     FROM phy_subitem,phy_project_subitem_connect
     WHERE phy_subitem.subitem_id = phy_project_subitem_connect.subitem_id AND phy_project_subitem_connect.project_id = #{id};
   </select>
+
+  <delete id="deleteByProjectId">
+    delete from phy_project_subitem_connect where project_id = #{projectId}
+  </delete>
 </mapper>

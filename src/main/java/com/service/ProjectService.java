@@ -1,5 +1,6 @@
 package com.service;
 
+import com.pojo.PhyProject;
 import com.util.ResponseDTO;
 import com.vo.PageVo;
 import com.vo.SearchPageVo;
@@ -11,5 +12,8 @@ import com.vo.SearchPageVo;
  */
 public interface ProjectService {
     ResponseDTO getAllProject(PageVo vo);
-    ResponseDTO searchProjectByName(SearchPageVo vo);
+    ResponseDTO searchProject(SearchPageVo vo);
+    ResponseDTO switchProjectStatus(PhyProject vo);
+    ResponseDTO addProject(PhyProject vo);
+    ResponseDTO editProject(PhyProject vo);
 }

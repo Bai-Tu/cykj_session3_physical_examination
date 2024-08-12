@@ -16,4 +16,6 @@ public interface SubitemService {
     ResponseDTO editSubitem(PhySubitem subitem);
     ResponseDTO searchSubitem(SearchPageVo vo);
     ResponseDTO editSubitemStatus(PhySubitem subitem);
+    ResponseDTO getAllSubitemNoVo();
+    ResponseDTO getDiffSubitem(int projectId);
 }
