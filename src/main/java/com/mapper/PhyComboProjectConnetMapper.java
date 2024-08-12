@@ -1,6 +1,9 @@
 package com.mapper;
 
 import com.pojo.PhyComboProjectConnet;
+import com.pojo.PhyProject;
+
+import java.util.List;
 
 /**
  * @author 李璟瑜
@@ -19,4 +22,6 @@ public interface PhyComboProjectConnetMapper {
     int updateByPrimaryKeySelective(PhyComboProjectConnet record);
 
     int updateByPrimaryKey(PhyComboProjectConnet record);
+
+    List<PhyProject> getProjectByComboId(int comboId);
 }

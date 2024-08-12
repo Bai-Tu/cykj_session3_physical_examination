@@ -110,10 +110,10 @@
       <if test="name != null and name != ''">
         and project_name like concat('%',#{name,jdbcType=VARCHAR},'%')
       </if>
-      <if test="highPrice != null">
+      <if test="highPrice != null and highPrice != 0">
         and project_price &lt;= #{highPrice}
       </if>
-      <if test="lowPrice != null">
+      <if test="lowPrice != null and lowPrice != 0">
         and project_price >= #{lowPrice}
       </if>
     </where>

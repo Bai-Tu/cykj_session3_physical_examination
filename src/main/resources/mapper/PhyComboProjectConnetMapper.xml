@@ -19,7 +19,12 @@
     from phy_combo_project_connet
     where combo_project_connet_id = #{comboProjectConnetId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="getProjectByComboId" resultType="com.pojo.PhyProject">
+      select phy_project.*
+      from phy_project,phy_combo_project_connet
+      where phy_project.project_id = phy_combo_project_connet.project_id and phy_combo_project_connet.combo_id = #{comboId}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from phy_combo_project_connet
     where combo_project_connet_id = #{comboProjectConnetId,jdbcType=INTEGER}

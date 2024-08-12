@@ -1,6 +1,9 @@
 package com.mapper;
 
 import com.pojo.PhyCombo;
+import com.vo.SearchPageVo;
+
+import java.util.List;
 
 /**
  * @author 李璟瑜
@@ -19,4 +22,6 @@ public interface PhyComboMapper {
     int updateByPrimaryKeySelective(PhyCombo record);
 
     int updateByPrimaryKey(PhyCombo record);
+    List<PhyCombo> getAllCombo();
+    List<PhyCombo> searchCombo(SearchPageVo vo);
 }
