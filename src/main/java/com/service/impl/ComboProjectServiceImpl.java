@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.mapper.PhyComboProjectConnetMapper;
 import com.pojo.PhyProject;
+import com.pojo.PhySubitem;
 import com.service.ComboProjectService;
 import com.util.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,11 @@ public class ComboProjectServiceImpl implements ComboProjectService {
         List<PhyProject> projectByComboId = mapper.getProjectByComboId(comboId);
         return ResponseDTO.success(projectByComboId);
 
+    }
+
+    @Override
+    public ResponseDTO getSubitemByComboId(int comboId) {
+        List<PhySubitem> subitemByComboId = mapper.getSubitemByComboId(comboId);
+        return ResponseDTO.success(subitemByComboId);
     }
 }

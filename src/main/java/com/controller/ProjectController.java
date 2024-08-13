@@ -1,5 +1,7 @@
 package com.controller;
 
+import com.pojo.PhyCombo;
+import com.pojo.PhyComboProjectConnet;
 import com.pojo.PhyProject;
 import com.service.ProjectService;
 import com.util.ResponseDTO;
@@ -55,6 +57,20 @@ public class ProjectController {
     @RequestMapping("/switchProjectStatus")
     public ResponseDTO switchProjectStatus(@RequestBody PhyProject vo){
         ResponseDTO responseDTO = service.switchProjectStatus(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getAllProjectNoPage")
+    public ResponseDTO getAllProjectNoPage(){
+        ResponseDTO responseDTO = service.getAllProjectNoPage();
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getDiffProject")
+    public ResponseDTO getDiffProject(@RequestBody PhyCombo vo){
+        ResponseDTO responseDTO = service.getDiffProject(vo.getComboId());
         return responseDTO;
     }
 

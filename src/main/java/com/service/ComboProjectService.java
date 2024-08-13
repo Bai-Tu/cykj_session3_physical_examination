@@ -9,4 +9,5 @@ import com.util.ResponseDTO;
  */
 public interface ComboProjectService {
     ResponseDTO getProjectByComboId(int comboId);
+    ResponseDTO getSubitemByComboId(int comboId);
 }

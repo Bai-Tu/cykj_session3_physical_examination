@@ -16,4 +16,6 @@ public interface ProjectService {
     ResponseDTO switchProjectStatus(PhyProject vo);
     ResponseDTO addProject(PhyProject vo);
     ResponseDTO editProject(PhyProject vo);
+    ResponseDTO getAllProjectNoPage();
+    ResponseDTO getDiffProject(int comboId);
 }

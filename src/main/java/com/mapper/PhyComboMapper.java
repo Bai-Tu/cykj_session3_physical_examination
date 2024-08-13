@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author 李璟瑜
- * @date 2024/8/8 10:57
+ * @date 2024/8/13 8:38
  * @description:
  */
 public interface PhyComboMapper {
@@ -22,6 +22,8 @@ public interface PhyComboMapper {
     int updateByPrimaryKeySelective(PhyCombo record);
 
     int updateByPrimaryKey(PhyCombo record);
+
     List<PhyCombo> getAllCombo();
+
     List<PhyCombo> searchCombo(SearchPageVo vo);
 }

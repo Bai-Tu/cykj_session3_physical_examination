@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author 李璟瑜
- * @date 2024/8/8 10:57
+ * @date 2024/8/13 11:26
  * @description:
  */
 @Data
@@ -50,4 +50,9 @@ public class PhyPatient {
      * 注册时间
      */
     private Date patientCreateTime;
+
+    /**
+     * 1开启0冻结
+     */
+    private Integer patientStatus;
 }

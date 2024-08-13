@@ -58,6 +58,8 @@
                   <option name="javaModelName" value="PhyCombo" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>
@@ -76,9 +78,12 @@
             <entry key="physicalexa:phy_conclution">
               <value>
                 <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
                   <option name="javaModelName" value="PhyConclution" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>
@@ -146,6 +151,8 @@
                   <option name="javaModelName" value="PhyPatient" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>
@@ -219,9 +226,12 @@
             <entry key="physicalexa:phy_subitem_conclution">
               <value>
                 <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
                   <option name="javaModelName" value="PhySubitemConclution" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>

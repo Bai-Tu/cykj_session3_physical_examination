@@ -22,7 +22,7 @@
     <select id="getProjectByComboId" resultType="com.pojo.PhyProject">
       select phy_project.*
       from phy_project,phy_combo_project_connet
-      where phy_project.project_id = phy_combo_project_connet.project_id and phy_combo_project_connet.combo_id = #{comboId}
+      where phy_project.project_id = phy_combo_project_connet.project_id and phy_combo_project_connet.combo_id = #{comboId} and phy_combo_project_connet.combo_id != 0
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
@@ -74,4 +74,20 @@
       project_id = #{projectId,jdbcType=INTEGER}
     where combo_project_connet_id = #{comboProjectConnetId,jdbcType=INTEGER}
   </update>
+
+  <select id="getSubitemByComboId" resultType="com.pojo.PhySubitem">
+    select phy_subitem.*
+    from phy_subitem,phy_combo_project_connet
+    where phy_subitem.subitem_id = phy_combo_project_connet.subitem_id and phy_combo_project_connet.combo_id = #{comboId}
+  </select>
+
+  <delete id="deleteByComboId">
+    delete from phy_combo_project_connet where combo_id = #{comboId}
+  </delete>
+
+  <select id="getProjectByProjectId" resultType="com.pojo.PhyProject">
+    select phy_project.*
+    from phy_project,phy_combo_project_connet
+    where phy_project.project_id = phy_combo_project_connet.project_id and phy_combo_project_connet.project_id = #{project}
+  </select>
 </mapper>

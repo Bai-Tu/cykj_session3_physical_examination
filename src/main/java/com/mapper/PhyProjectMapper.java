@@ -29,4 +29,5 @@ public interface PhyProjectMapper {
     List<PhyProject> selectAllByProjectName(String name);
     List<PhyProjectSubitemConnect> getProSubConnect(int projectId);
     List<PhyProject> selectAllByNameAndPrice(SearchPageVo vo);
+    List<PhyProject> selectDiffProject(int comboId);
 }

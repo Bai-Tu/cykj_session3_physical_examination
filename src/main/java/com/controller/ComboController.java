@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.pojo.PhyCombo;
 import com.service.ComboService;
 import com.util.ResponseDTO;
 import com.vo.PageVo;
@@ -33,6 +34,28 @@ public class ComboController {
     @RequestMapping("/searchCombo")
     public ResponseDTO searchCombo(@RequestBody SearchPageVo vo){
         ResponseDTO responseDTO = service.searchCombo(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/addCombo")
+    public ResponseDTO addCombo(@RequestBody PhyCombo vo){
+        ResponseDTO responseDTO = service.addCombo(vo);
+        return responseDTO;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/editCombo")
+    public ResponseDTO editCombo(@RequestBody PhyCombo vo){
+        ResponseDTO responseDTO = service.editCombo(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/switchComboStatus")
+    public ResponseDTO switchComboStatus(@RequestBody PhyCombo vo){
+        ResponseDTO responseDTO = service.switchComboStatus(vo);
         return responseDTO;
     }
 

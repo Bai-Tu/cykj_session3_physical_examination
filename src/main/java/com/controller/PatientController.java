@@ -1,12 +1,15 @@
 package com.controller;
 
+import com.pojo.PhyPatient;
 import com.service.PatientService;
 import com.util.CheckCode;
 import com.util.ImageCodeUtils;
 import com.util.Md5;
 import com.util.ResponseDTO;
 import com.vo.LoginVo;
+import com.vo.PageVo;
 import com.vo.RegisterVo;
+import com.vo.SearchPageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,6 +54,50 @@ public class PatientController {
         String encrypted = Md5.getEncrypted(vo.getPwd());
         vo.setPwd(encrypted);
         ResponseDTO responseDTO = service.loginPatient(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getAllPatientByPage")
+    public ResponseDTO getAllPatientByPage(@RequestBody PageVo vo){
+        ResponseDTO responseDTO = service.getAllPatientByPage(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/editPatient")
+    public ResponseDTO editPatient(@RequestBody PhyPatient vo){
+        ResponseDTO responseDTO = service.editPatient(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/resetPwd")
+    public ResponseDTO resetPwd(@RequestBody PhyPatient vo){
+        vo.setPatientPassword("e10adc3949ba59abbe56e057f20f883e");
+        ResponseDTO responseDTO = service.editPatient(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/addPatient")
+    public ResponseDTO addPatient(@RequestBody PhyPatient vo){
+        vo.setPatientPassword("e10adc3949ba59abbe56e057f20f883e");
+        ResponseDTO responseDTO = service.addPatient(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/addBudget")
+    public ResponseDTO addBudget(@RequestBody PhyPatient vo){
+        ResponseDTO responseDTO = service.addBudget(vo);
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/searchPatient")
+    public ResponseDTO searchPatient(@RequestBody SearchPageVo vo){
+        ResponseDTO responseDTO = service.searchPatient(vo);
         return responseDTO;
     }
 

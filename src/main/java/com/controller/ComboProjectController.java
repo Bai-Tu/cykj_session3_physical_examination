@@ -28,4 +28,11 @@ public class ComboProjectController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/getSubitemByComboId")
+    public ResponseDTO getSubitemByComboId(@RequestBody PhyComboProjectConnet vo){
+        ResponseDTO responseDTO = service.getSubitemByComboId(vo.getComboId());
+        return responseDTO;
+    }
+
 }

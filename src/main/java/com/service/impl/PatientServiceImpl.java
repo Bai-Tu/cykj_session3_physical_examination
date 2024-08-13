@@ -1,11 +1,15 @@
 package com.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mapper.PhyPatientMapper;
 import com.pojo.PhyPatient;
 import com.service.PatientService;
 import com.util.ResponseDTO;
 import com.vo.LoginVo;
+import com.vo.PageVo;
 import com.vo.RegisterVo;
+import com.vo.SearchPageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +63,48 @@ public class PatientServiceImpl implements PatientService {
         }else {
             return ResponseDTO.fail();
         }
+    }
+
+    @Override
+    public ResponseDTO getAllPatientByPage(PageVo vo) {
+        PageHelper.startPage(vo.getPagen(),vo.getLimit());
+        List<PhyPatient> phyPatients = mapper.selectAllPatient();
+        PageInfo<PhyPatient> pageInfo = new PageInfo<>(phyPatients);
+        return ResponseDTO.success(pageInfo);
+    }
+
+    @Override
+    public ResponseDTO editPatient(PhyPatient vo) {
+        int i = mapper.updateByPrimaryKeySelective(vo);
+        return ResponseDTO.success(i);
+    }
+
+    @Override
+    public ResponseDTO addPatient(PhyPatient vo) {
+        PhyPatient patient = mapper.searchPatientByIdentity(vo.getPatientIdentity());
+        if (patient != null){
+            return new ResponseDTO(-2,null,null);
+        }
+
+        PhyPatient patient1 = mapper.searchPatientByPhone(vo.getPatientPhone());
+        if (patient1 != null){
+            return new ResponseDTO(-2,null,null);
+        }
+        int i = mapper.insertSelective(vo);
+        return ResponseDTO.success(i);
+    }
+
+    @Override
+    public ResponseDTO addBudget(PhyPatient vo) {
+        Integer i = mapper.addBudget(vo);
+        return ResponseDTO.success(i);
+    }
+
+    @Override
+    public ResponseDTO searchPatient(SearchPageVo vo) {
+        PageHelper.startPage(vo.getPagen(), vo.getLimit());
+        List<PhyPatient> phyPatients = mapper.searchPatient(vo);
+        PageInfo<PhyPatient> pageInfo = new PageInfo<>(phyPatients);
+        return ResponseDTO.success(pageInfo);
     }
 }

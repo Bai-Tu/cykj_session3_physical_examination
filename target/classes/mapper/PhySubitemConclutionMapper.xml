@@ -6,12 +6,13 @@
     <!--@Table phy_subitem_conclution-->
     <id column="subitem_conclution_id" jdbcType="INTEGER" property="subitemConclutionId" />
     <result column="subitem_id" jdbcType="INTEGER" property="subitemId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
     <result column="order_nameber" jdbcType="VARCHAR" property="orderNameber" />
     <result column="subitem_conclution" jdbcType="VARCHAR" property="subitemConclution" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    subitem_conclution_id, subitem_id, order_nameber, subitem_conclution
+    subitem_conclution_id, subitem_id, department_id, order_nameber, subitem_conclution
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -27,10 +28,10 @@
   </delete>
   <insert id="insert" parameterType="com.pojo.PhySubitemConclution">
     <!--@mbg.generated-->
-    insert into phy_subitem_conclution (subitem_conclution_id, subitem_id, order_nameber, 
-      subitem_conclution)
-    values (#{subitemConclutionId,jdbcType=INTEGER}, #{subitemId,jdbcType=INTEGER}, #{orderNameber,jdbcType=VARCHAR}, 
-      #{subitemConclution,jdbcType=VARCHAR})
+    insert into phy_subitem_conclution (subitem_conclution_id, subitem_id, department_id, 
+      order_nameber, subitem_conclution)
+    values (#{subitemConclutionId,jdbcType=INTEGER}, #{subitemId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, 
+      #{orderNameber,jdbcType=VARCHAR}, #{subitemConclution,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.PhySubitemConclution">
     <!--@mbg.generated-->
@@ -41,6 +42,9 @@
       </if>
       <if test="subitemId != null">
         subitem_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
       </if>
       <if test="orderNameber != null">
         order_nameber,
@@ -55,6 +59,9 @@
       </if>
       <if test="subitemId != null">
         #{subitemId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="orderNameber != null">
         #{orderNameber,jdbcType=VARCHAR},
@@ -71,6 +78,9 @@
       <if test="subitemId != null">
         subitem_id = #{subitemId,jdbcType=INTEGER},
       </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
       <if test="orderNameber != null">
         order_nameber = #{orderNameber,jdbcType=VARCHAR},
       </if>
@@ -84,6 +94,7 @@
     <!--@mbg.generated-->
     update phy_subitem_conclution
     set subitem_id = #{subitemId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
       order_nameber = #{orderNameber,jdbcType=VARCHAR},
       subitem_conclution = #{subitemConclution,jdbcType=VARCHAR}
     where subitem_conclution_id = #{subitemConclutionId,jdbcType=INTEGER}

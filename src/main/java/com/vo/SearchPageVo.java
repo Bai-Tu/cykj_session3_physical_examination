@@ -14,4 +14,6 @@ public class SearchPageVo {
     private String name;
     private float lowPrice;
     private float highPrice;
+    private String tele;
+    private String iden;
 }

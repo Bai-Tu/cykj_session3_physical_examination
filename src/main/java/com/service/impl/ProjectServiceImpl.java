@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mapper.PhyComboProjectConnetMapper;
 import com.mapper.PhyProjectMapper;
 import com.mapper.PhyProjectSubitemConnectMapper;
 import com.mapper.PhySubitemMapper;
@@ -33,6 +34,9 @@ public class ProjectServiceImpl implements ProjectService {
     PhyProjectSubitemConnectMapper connectMapper;
 
     @Autowired
+    PhyComboProjectConnetMapper comproConMapper;
+
+    @Autowired
     PhySubitemMapper subMapper;
 
     @Override
@@ -53,8 +57,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ResponseDTO switchProjectStatus(PhyProject vo) {
-        List<PhyProjectSubitemConnect> proSubConnect = mapper.getProSubConnect(vo.getProjectId());
-        if (proSubConnect.size() != 0){
+        List<PhyProject> projectByComboId = comproConMapper.getProjectByProjectId(vo.getProjectId());
+        if (projectByComboId.size() != 0){
             return new ResponseDTO(-2,"有存在",null);
         }else {
             int i = mapper.updateByPrimaryKeySelective(vo);
@@ -91,5 +95,17 @@ public class ProjectServiceImpl implements ProjectService {
             connectMapper.insertSelective(ps);
         }
         return ResponseDTO.success();
+    }
+
+    @Override
+    public ResponseDTO getAllProjectNoPage() {
+        List<PhyProject> allProject = mapper.getAllProject();
+        return ResponseDTO.success(allProject);
+    }
+
+    @Override
+    public ResponseDTO getDiffProject(int comboId) {
+        List<PhyProject> phyProjects = mapper.selectDiffProject(comboId);
+        return ResponseDTO.success(phyProjects);
     }
 }

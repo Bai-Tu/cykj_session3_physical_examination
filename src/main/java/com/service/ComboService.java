@@ -1,5 +1,6 @@
 package com.service;
 
+import com.pojo.PhyCombo;
 import com.util.ResponseDTO;
 import com.vo.PageVo;
 import com.vo.SearchPageVo;
@@ -14,5 +15,7 @@ import org.springframework.stereotype.Service;
 public interface ComboService {
     ResponseDTO getAllComboByPage(PageVo vo);
     ResponseDTO searchCombo(SearchPageVo vo);
-
+    ResponseDTO addCombo(PhyCombo vo);
+    ResponseDTO editCombo(PhyCombo vo);
+    ResponseDTO switchComboStatus(PhyCombo vo);
 }

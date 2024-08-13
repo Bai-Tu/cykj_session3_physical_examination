@@ -118,4 +118,14 @@
       </if>
     </where>
   </select>
+
+  <select id="selectDiffProject" resultMap="BaseResultMap">
+    select phy_project.*
+    from  phy_project
+    where phy_project.project_id NOT in (
+      select project_id
+      from phy_combo_project_connet
+      where combo_id = #{comboId}
+    )
+  </select>
 </mapper>

@@ -110,12 +110,22 @@
       <if test="name != null and name != ''">
         and project_name like concat('%',#{name,jdbcType=VARCHAR},'%')
       </if>
-      <if test="highPrice != null">
+      <if test="highPrice != null and highPrice != 0">
         and project_price &lt;= #{highPrice}
       </if>
-      <if test="lowPrice != null">
+      <if test="lowPrice != null and lowPrice != 0">
         and project_price >= #{lowPrice}
       </if>
     </where>
+  </select>
+
+  <select id="selectDiffProject" resultMap="BaseResultMap">
+    select phy_project.*
+    from  phy_project
+    where phy_project.project_id NOT in (
+      select project_id
+      from phy_combo_project_connet
+      where combo_id = #{comboId}
+    )
   </select>
 </mapper>
