@@ -85,6 +85,11 @@ public class ComboServiceImpl implements ComboService {
     public ResponseDTO switchComboStatus(PhyCombo vo) {
         int i = mapper.updateByPrimaryKeySelective(vo);
         return ResponseDTO.success();
+    }
 
+    @Override
+    public ResponseDTO getAllComboNoPage() {
+        List<PhyCombo> allCombo = mapper.getAllCombo();
+        return ResponseDTO.success(allCombo);
     }
 }

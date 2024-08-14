@@ -130,6 +130,8 @@
                   <option name="javaModelName" value="PhyOrder" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>
@@ -137,9 +139,12 @@
             <entry key="physicalexa:phy_order_context">
               <value>
                 <TableGenerateConfig>
+                  <option name="generatedKey" value="order_context_id" />
                   <option name="javaModelName" value="PhyOrderContext" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
                   <option name="useActualColumnName" value="false" />
                 </TableGenerateConfig>
               </value>

@@ -187,4 +187,8 @@
       </if>
     </where>
   </select>
+
+  <update id="checkOutOrder">
+    update phy_patient set patient_buddget = patient_buddget - #{price,jdbcType=DECIMAL} where patient_id = #{id}
+  </update>
 </mapper>

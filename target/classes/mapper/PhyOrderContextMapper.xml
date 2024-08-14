@@ -5,12 +5,13 @@
     <!--@mbg.generated-->
     <!--@Table phy_order_context-->
     <id column="order_context_id" jdbcType="INTEGER" property="orderContextId" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
     <result column="combo_id" jdbcType="INTEGER" property="comboId" />
     <result column="project_id" jdbcType="INTEGER" property="projectId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    order_context_id, combo_id, project_id
+    order_context_id, order_number, combo_id, project_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -24,19 +25,19 @@
     delete from phy_order_context
     where order_context_id = #{orderContextId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pojo.PhyOrderContext">
+  <insert id="insert" keyColumn="order_context_id" keyProperty="orderContextId" parameterType="com.pojo.PhyOrderContext" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into phy_order_context (order_context_id, combo_id, project_id
+    insert into phy_order_context (order_number, combo_id, project_id
       )
-    values (#{orderContextId,jdbcType=INTEGER}, #{comboId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}
+    values (#{orderNumber,jdbcType=VARCHAR}, #{comboId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.PhyOrderContext">
+  <insert id="insertSelective" keyColumn="order_context_id" keyProperty="orderContextId" parameterType="com.pojo.PhyOrderContext" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into phy_order_context
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderContextId != null">
-        order_context_id,
+      <if test="orderNumber != null">
+        order_number,
       </if>
       <if test="comboId != null">
         combo_id,
@@ -46,8 +47,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderContextId != null">
-        #{orderContextId,jdbcType=INTEGER},
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
       </if>
       <if test="comboId != null">
         #{comboId,jdbcType=INTEGER},
@@ -61,6 +62,9 @@
     <!--@mbg.generated-->
     update phy_order_context
     <set>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
       <if test="comboId != null">
         combo_id = #{comboId,jdbcType=INTEGER},
       </if>
@@ -73,7 +77,8 @@
   <update id="updateByPrimaryKey" parameterType="com.pojo.PhyOrderContext">
     <!--@mbg.generated-->
     update phy_order_context
-    set combo_id = #{comboId,jdbcType=INTEGER},
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      combo_id = #{comboId,jdbcType=INTEGER},
       project_id = #{projectId,jdbcType=INTEGER}
     where order_context_id = #{orderContextId,jdbcType=INTEGER}
   </update>

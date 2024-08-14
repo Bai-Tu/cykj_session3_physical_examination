@@ -59,5 +59,11 @@ public class ComboController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/getAllComboNoPage")
+    public ResponseDTO getAllComboNoPage(){
+        ResponseDTO responseDTO = service.getAllComboNoPage();
+        return responseDTO;
+    }
 
 }

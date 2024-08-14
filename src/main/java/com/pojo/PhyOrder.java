@@ -6,14 +6,14 @@ import lombok.Data;
 
 /**
  * @author 李璟瑜
- * @date 2024/8/8 10:57
+ * @date 2024/8/14 9:11
  * @description:
  */
 @Data
 public class PhyOrder {
     private Integer orderId;
 
-    private Integer orderNumber;
+    private String orderNumber;
 
     private Integer patientId;
 

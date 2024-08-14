@@ -130,4 +130,26 @@ public class MenuServiceImpl implements MenuService {
         }
         return ResponseDTO.success();
     }
+
+    @Override
+    public ResponseDTO searchMenuByRoleInTreeNoPage() {
+        List<PhyMenu> phyMenus = mapper.selectAll();
+        ArrayList<PhyMenu> menus = ListInTree.turnToTree(phyMenus);
+        return ResponseDTO.success(menus);
+    }
+
+    @Override
+    public ResponseDTO switchMenuStatus(PhyMenu vo) {
+        List<PhyMenu> childMenu = mapper.getChildMenu(vo.getMenuId());
+        PhyMenu menu = mapper.selectByPrimaryKey(vo.getMenuId());
+        if (childMenu.size() != 0){
+            return new ResponseDTO(-2,null,null);
+        }
+        if (menu.getMenuParentId() == 0 && vo.getMenuStatus() == 1){
+            mapper.switchAllChild(vo.getMenuId());
+        }
+        int i = mapper.updateByPrimaryKeySelective(vo);
+
+        return ResponseDTO.success(i);
+    }
 }

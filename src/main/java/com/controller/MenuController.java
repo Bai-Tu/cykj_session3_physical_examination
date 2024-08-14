@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.mapper.PhyMenuMapper;
+import com.pojo.PhyMenu;
 import com.pojo.PhyRole;
 import com.service.MenuService;
 import com.util.ResponseDTO;
@@ -49,5 +50,20 @@ public class MenuController {
         ResponseDTO responseDTO = service.editMenuAuthority(vo.getRoleId(), vo.getMenuData());
         return responseDTO;
     }
+
+    @ResponseBody
+    @RequestMapping("/searchMenuByRoleInTreeNoPage")
+    public ResponseDTO searchMenuByRoleInTreeNoPage(){
+        ResponseDTO responseDTO = service.searchMenuByRoleInTreeNoPage();
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/switchMenuStatus")
+    public ResponseDTO switchMenuStatus(@RequestBody PhyMenu vo){
+        ResponseDTO responseDTO = service.switchMenuStatus(vo);
+        return responseDTO;
+    }
+
 
 }

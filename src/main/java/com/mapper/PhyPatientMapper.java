@@ -5,6 +5,7 @@ import com.vo.RegisterVo;
 import com.vo.SearchPageVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -43,4 +44,5 @@ public interface PhyPatientMapper {
 
     Integer addBudget(PhyPatient vo);
     List<PhyPatient> searchPatient(SearchPageVo vo);
+    int checkOutOrder(@Param("id") int id, @Param("price")BigDecimal price);
 }
