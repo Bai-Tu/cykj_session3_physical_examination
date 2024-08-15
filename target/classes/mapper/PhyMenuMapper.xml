@@ -188,4 +188,12 @@
   <delete id="deletePermissionByRoleId">
     delete from phy_permission where role_id = #{roleId}
   </delete>
+
+  <select id="getChildMenu" resultMap="BaseResultMap">
+    select * from phy_menu where menu_status = 1 and menu_parent_id = #{menuId}
+  </select>
+
+  <update id="switchAllChild">
+    update phy_menu set menu_status = 1 where menu_parent_id = #{menuId}
+  </update>
 </mapper>

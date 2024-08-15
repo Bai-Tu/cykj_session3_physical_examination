@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.mapper.PhyProjectSubitemConnectMapper;
 import com.mapper.PhySubitemMapper;
 import com.pojo.PhyDepartment;
+import com.pojo.PhyProject;
 import com.pojo.PhyProjectSubitemConnect;
 import com.pojo.PhySubitem;
 import com.service.SubitemService;
@@ -90,5 +91,17 @@ public class SubitemServiceImpl implements SubitemService {
     public ResponseDTO getDiffSubitem(int projectId) {
         List<PhySubitem> diffSubitem = mapper.getDiffSubitem(projectId);
         return ResponseDTO.success(diffSubitem);
+    }
+
+    @Override
+    public ResponseDTO getAllSubitemNoVoWithStatus(int status) {
+        List<PhySubitem> allSubitemNoVoWithStatus = mapper.getAllSubitemNoVoWithStatus(status);
+        return ResponseDTO.success(allSubitemNoVoWithStatus);
+    }
+
+    @Override
+    public ResponseDTO getDiffSubitemWithStatus(PhyProject vo) {
+        List<PhySubitem> diffSubitemWithStatus = mapper.getDiffSubitemWithStatus(vo.getProjectStatus(),vo.getProjectId());
+        return ResponseDTO.success(diffSubitemWithStatus);
     }
 }

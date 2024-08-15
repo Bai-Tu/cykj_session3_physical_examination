@@ -108,4 +108,10 @@ public class ProjectServiceImpl implements ProjectService {
         List<PhyProject> phyProjects = mapper.selectDiffProject(comboId);
         return ResponseDTO.success(phyProjects);
     }
+
+    @Override
+    public ResponseDTO getAllProjectWithStatus(int status) {
+        List<PhyProject> allProjectWithStatus = mapper.getAllProjectWithStatus(status);
+        return ResponseDTO.success(allProjectWithStatus);
+    }
 }

@@ -2,9 +2,11 @@ package com.mapper;
 
 import com.pojo.PhyConclution;
 
+import java.util.List;
+
 /**
  * @author 李璟瑜
- * @date 2024/8/13 8:40
+ * @date 2024/8/15 12:51
  * @description:
  */
 public interface PhyConclutionMapper {
@@ -19,4 +21,6 @@ public interface PhyConclutionMapper {
     int updateByPrimaryKeySelective(PhyConclution record);
 
     int updateByPrimaryKey(PhyConclution record);
+    PhyConclution getConclutionByOrderNumber(String number);
+    int updateByOrderNumber(PhyConclution conclution);
 }

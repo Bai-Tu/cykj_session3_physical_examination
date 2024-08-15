@@ -74,5 +74,12 @@ public class ProjectController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/getAllProjectWithStatus")
+    public ResponseDTO getAllProjectWithStatus(@RequestBody PhyProject vo){
+        ResponseDTO responseDTO = service.getAllProjectWithStatus(vo.getProjectStatus());
+        return responseDTO;
+    }
+
 
 }

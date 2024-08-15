@@ -29,4 +29,10 @@ public class RoleServiceImpl implements RoleService {
         PageInfo<PhyRole> pageInfo = new PageInfo<>(allRole);
         return ResponseDTO.success(pageInfo);
     }
+
+    @Override
+    public ResponseDTO addRole(PhyRole vo) {
+        int i = mapper.insertSelective(vo);
+        return ResponseDTO.success(i);
+    }
 }

@@ -92,4 +92,10 @@ public class ComboServiceImpl implements ComboService {
         List<PhyCombo> allCombo = mapper.getAllCombo();
         return ResponseDTO.success(allCombo);
     }
+
+    @Override
+    public ResponseDTO getAllComboWithStatus(int status) {
+        List<PhyCombo> allComboWithStatus = mapper.getAllComboWithStatus(status);
+        return ResponseDTO.success(allComboWithStatus);
+    }
 }

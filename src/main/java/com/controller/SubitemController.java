@@ -72,5 +72,19 @@ public class SubitemController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/getAllSubitemNoVoWithStatus")
+    public ResponseDTO getAllSubitemNoVoWithStatus(@RequestBody PhySubitem vo){
+        ResponseDTO responseDTO = service.getAllSubitemNoVoWithStatus(vo.getSubitemStatus());
+        return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getDiffSubitemWithStatus")
+    public ResponseDTO getDiffSubitemWithStatus(@RequestBody PhyProject vo){
+        ResponseDTO responseDTO = service.getDiffSubitemWithStatus(vo);
+        return responseDTO;
+    }
+
 
 }

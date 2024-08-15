@@ -99,4 +99,8 @@
       </if>
     </where>
   </select>
+
+  <select id="getAllComboWithStatus" resultMap="BaseResultMap">
+    select * from phy_combo where combo_status = #{status}
+    </select>
 </mapper>

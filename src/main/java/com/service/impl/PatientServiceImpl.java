@@ -12,6 +12,7 @@ import com.vo.RegisterVo;
 import com.vo.SearchPageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -80,7 +81,9 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    @Transactional
     public ResponseDTO addPatient(PhyPatient vo) {
+        vo.setPatientPassword("e10adc3949ba59abbe56e057f20f883e");
         PhyPatient patient = mapper.searchPatientByIdentity(vo.getPatientIdentity());
         if (patient != null){
             return new ResponseDTO(-2,null,null);

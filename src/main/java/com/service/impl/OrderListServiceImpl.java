@@ -2,9 +2,7 @@ package com.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mapper.PhyOrderContextMapper;
-import com.mapper.PhyOrderMapper;
-import com.mapper.PhyPatientMapper;
+import com.mapper.*;
 import com.pojo.*;
 import com.service.OrderListService;
 import com.util.ResponseDTO;
@@ -13,6 +11,7 @@ import com.vo.PageVo;
 import com.vo.SearchPageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,7 +29,22 @@ public class OrderListServiceImpl implements OrderListService {
     PhyPatientMapper patientMapper;
 
     @Autowired
+    PhyProjectSubitemConnectMapper projectSubitemConnectMapper;
+
+    @Autowired
+    PhyComboProjectConnetMapper comboProjectConnetMapper;
+
+    @Autowired
     PhyOrderContextMapper orderContextMapper;
+
+    @Autowired
+    PhyProjectMapper projectMapper;
+
+    @Autowired
+    PhySubitemConclutionMapper subitemConclutionMapper;
+
+    @Autowired
+    PhyConclutionMapper conclutionMapper;
 
     @Override
     public ResponseDTO getOrderListByIdInPage(PageVo vo) {
@@ -49,16 +63,56 @@ public class OrderListServiceImpl implements OrderListService {
     }
 
     @Override
+    @Transactional
     public ResponseDTO checkOutOrder(PhyOrder vo) {
-        PhyPatient patient = patientMapper.selectByPrimaryKey(vo.getPatientId());
-        int i = patient.getPatientBuddget().compareTo(vo.getOrderPrice());
-        if (i < 0){
-            return new ResponseDTO(-2,"余额不足",null);
-        }else {
-            patientMapper.checkOutOrder(vo.getPatientId(), vo.getOrderPrice());
-            vo.setOrderStatus("1");
-            int i1 = mapper.updateByPrimaryKeySelective(vo);
-            return ResponseDTO.success(i1);
+        try {
+            PhyPatient patient = patientMapper.selectByPrimaryKey(vo.getPatientId());
+            int i = patient.getPatientBuddget().compareTo(vo.getOrderPrice());
+            if (i < 0){
+                return new ResponseDTO(-2,"余额不足",null);
+            }else {
+                //修改訂單狀態
+                patientMapper.checkOutOrder(vo.getPatientId(), vo.getOrderPrice());
+                vo.setOrderStatus("1");
+                int i1 = mapper.updateByPrimaryKeySelective(vo);
+
+                //创建细项内容
+                List<PhyOrderContext> list = orderContextMapper.getContextListByOrderNumber(vo.getOrderNumber());
+                for (PhyOrderContext context : list) {
+                    //是套餐
+                    if (context.getProjectId() == 0){
+                        List<PhyProject> projects = comboProjectConnetMapper.getProjectByComboId(context.getComboId());
+                        for (PhyProject project : projects) {
+                            List<PhySubitem> subitems = projectSubitemConnectMapper.selectAllByProjectId(project.getProjectId());
+                            for (PhySubitem subitem : subitems) {
+                                PhySubitemConclution conclution = new PhySubitemConclution();
+                                conclution.setOrderNameber(vo.getOrderNumber());
+                                conclution.setSubitemId(subitem.getSubitemId());
+                                conclution.setDepartmentId(project.getDepartmentId());
+                                subitemConclutionMapper.insertSelective(conclution);
+                            }
+                        }
+                    }else {
+                        PhyProject phyProject = projectMapper.selectByPrimaryKey(context.getProjectId());
+                        List<PhySubitem> subitems = projectSubitemConnectMapper.selectAllByProjectId(context.getProjectId());
+                        for (PhySubitem subitem : subitems) {
+                            PhySubitemConclution conclution = new PhySubitemConclution();
+                            conclution.setOrderNameber(vo.getOrderNumber());
+                            conclution.setSubitemId(subitem.getSubitemId());
+                            conclution.setDepartmentId(phyProject.getDepartmentId());
+                            subitemConclutionMapper.insertSelective(conclution);
+                        }
+                    }
+                }
+                PhyConclution allConclution = new PhyConclution();
+                allConclution.setOrderNumber(vo.getOrderNumber());
+                conclutionMapper.insertSelective(allConclution);
+
+                return ResponseDTO.success(i1);
+            }
+        } catch (Exception e) {
+            System.out.println("checkOutOrder回滚回滚");
+            return ResponseDTO.fail();
         }
     }
 

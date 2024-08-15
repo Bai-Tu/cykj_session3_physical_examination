@@ -82,4 +82,8 @@
       project_id = #{projectId,jdbcType=INTEGER}
     where order_context_id = #{orderContextId,jdbcType=INTEGER}
   </update>
+
+  <select id="getContextListByOrderNumber" resultMap="BaseResultMap">
+    select * from phy_order_context where order_number = #{number,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -78,7 +78,7 @@
             <entry key="physicalexa:phy_conclution">
               <value>
                 <TableGenerateConfig>
-                  <option name="generatedKey" value="" />
+                  <option name="generatedKey" value="conclution_id" />
                   <option name="javaModelName" value="PhyConclution" />
                   <option name="moduleName" value="physical" />
                   <option name="mybatisplusIdType" value="INPUT" />

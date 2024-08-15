@@ -99,4 +99,16 @@
       subitem_conclution = #{subitemConclution,jdbcType=VARCHAR}
     where subitem_conclution_id = #{subitemConclutionId,jdbcType=INTEGER}
   </update>
+
+  <select id="getOrderContextByNumber" resultType="com.pojo.SubitemConclutionAndSubitem">
+    SELECT DISTINCT  phy_subitem_conclution.*,phy_subitem.subitem_name,phy_subitem.subitem_standard_max,phy_subitem.subitem_standard_min,phy_subitem.subitem_unit
+    FROM `phy_subitem_conclution`,phy_subitem
+    WHERE phy_subitem_conclution.subitem_id = phy_subitem.subitem_id
+      AND phy_subitem_conclution.order_nameber = #{number,jdbcType=VARCHAR}
+
+  </select>
+
+  <select id="getNullConclutionByOrderNumber" resultMap="BaseResultMap">
+    select * from phy_subitem_conclution where order_nameber = #{number,jdbcType=VARCHAR} and (subitem_conclution = '' or subitem_conclution IS NULL)
+  </select>
 </mapper>

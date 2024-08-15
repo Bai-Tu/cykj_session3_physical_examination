@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.pojo.PhySubitem;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,5 +29,7 @@ public interface PhySubitemMapper {
     int editSubitem(PhySubitem subitem);
     List<PhySubitem> getBySubitemNameInSearch(String name);
     List<PhySubitem> getDiffSubitem(int projectId);
+    List<PhySubitem> getAllSubitemNoVoWithStatus(int status);
+    List<PhySubitem> getDiffSubitemWithStatus(@Param("status") int status,@Param("projectId") int projectId);
 
 }

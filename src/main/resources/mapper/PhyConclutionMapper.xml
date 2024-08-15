@@ -5,7 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table phy_conclution-->
     <id column="conclution_id" jdbcType="INTEGER" property="conclutionId" />
-    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
     <result column="conclution_content" jdbcType="VARCHAR" property="conclutionContent" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -24,20 +24,15 @@
     delete from phy_conclution
     where conclution_id = #{conclutionId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pojo.PhyConclution">
+  <insert id="insert" keyColumn="conclution_id" keyProperty="conclutionId" parameterType="com.pojo.PhyConclution" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into phy_conclution (conclution_id, order_number, conclution_content
-      )
-    values (#{conclutionId,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, #{conclutionContent,jdbcType=VARCHAR}
-      )
+    insert into phy_conclution (order_number, conclution_content)
+    values (#{orderNumber,jdbcType=VARCHAR}, #{conclutionContent,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.PhyConclution">
+  <insert id="insertSelective" keyColumn="conclution_id" keyProperty="conclutionId" parameterType="com.pojo.PhyConclution" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into phy_conclution
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="conclutionId != null">
-        conclution_id,
-      </if>
       <if test="orderNumber != null">
         order_number,
       </if>
@@ -46,11 +41,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="conclutionId != null">
-        #{conclutionId,jdbcType=INTEGER},
-      </if>
       <if test="orderNumber != null">
-        #{orderNumber,jdbcType=INTEGER},
+        #{orderNumber,jdbcType=VARCHAR},
       </if>
       <if test="conclutionContent != null">
         #{conclutionContent,jdbcType=VARCHAR},
@@ -62,7 +54,7 @@
     update phy_conclution
     <set>
       <if test="orderNumber != null">
-        order_number = #{orderNumber,jdbcType=INTEGER},
+        order_number = #{orderNumber,jdbcType=VARCHAR},
       </if>
       <if test="conclutionContent != null">
         conclution_content = #{conclutionContent,jdbcType=VARCHAR},
@@ -73,8 +65,16 @@
   <update id="updateByPrimaryKey" parameterType="com.pojo.PhyConclution">
     <!--@mbg.generated-->
     update phy_conclution
-    set order_number = #{orderNumber,jdbcType=INTEGER},
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
       conclution_content = #{conclutionContent,jdbcType=VARCHAR}
     where conclution_id = #{conclutionId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getConclutionByOrderNumber" resultMap="BaseResultMap">
+    select * from phy_conclution where order_number = #{number,jdbcType=VARCHAR}
+    </select>
+
+  <update id="updateByOrderNumber">
+    update phy_conclution set conclution_content = #{conclutionContent,jdbcType=VARCHAR} where order_number = #{orderNumber,jdbcType=VARCHAR}
   </update>
 </mapper>

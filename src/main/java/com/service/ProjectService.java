@@ -18,4 +18,5 @@ public interface ProjectService {
     ResponseDTO editProject(PhyProject vo);
     ResponseDTO getAllProjectNoPage();
     ResponseDTO getDiffProject(int comboId);
+    ResponseDTO getAllProjectWithStatus(int status);
 }

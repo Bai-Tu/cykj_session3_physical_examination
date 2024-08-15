@@ -1,6 +1,9 @@
 package com.mapper;
 
 import com.pojo.PhySubitemConclution;
+import com.pojo.SubitemConclutionAndSubitem;
+
+import java.util.List;
 
 /**
  * @author 李璟瑜
@@ -19,4 +22,6 @@ public interface PhySubitemConclutionMapper {
     int updateByPrimaryKeySelective(PhySubitemConclution record);
 
     int updateByPrimaryKey(PhySubitemConclution record);
+    List<SubitemConclutionAndSubitem> getOrderContextByNumber(String number);
+    List<PhySubitemConclution> getNullConclutionByOrderNumber(String number);
 }

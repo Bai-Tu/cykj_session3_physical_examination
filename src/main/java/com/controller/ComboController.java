@@ -66,4 +66,11 @@ public class ComboController {
         return responseDTO;
     }
 
+    @ResponseBody
+    @RequestMapping("/getAllComboWithStatus")
+    public ResponseDTO getAllComboWithStatus(@RequestBody PhyCombo vo){
+        ResponseDTO responseDTO = service.getAllComboWithStatus(vo.getComboStatus());
+        return responseDTO;
+    }
+
 }

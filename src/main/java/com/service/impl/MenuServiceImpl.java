@@ -48,7 +48,6 @@ public class MenuServiceImpl implements MenuService {
 
         for (PhyMenu menu : differentMenu) {
             if (menu.getMenuParentId()!=0){
-//                CyMenu menuById = mapper.getMenuById((int) menu.getMenuParentId());
                 PhyMenu menuById = collect.get(menu.getMenuParentId());
                 if (!differentMenu.contains(menuById)) {
                     if(mixList.contains(menuById)){

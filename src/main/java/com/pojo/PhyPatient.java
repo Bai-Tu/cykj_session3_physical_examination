@@ -2,6 +2,8 @@ package com.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import cn.hutool.core.annotation.Alias;
 import lombok.Data;
 
 /**
@@ -19,6 +21,7 @@ public class PhyPatient {
     /**
      * 名字
      */
+    @Alias("用户昵称")
     private String patientName;
 
     /**
@@ -34,16 +37,19 @@ public class PhyPatient {
     /**
      * 电话
      */
+    @Alias("用户电话")
     private String patientPhone;
 
     /**
      * 身份证
      */
+    @Alias("用户身份证")
     private String patientIdentity;
 
     /**
      * 年龄
      */
+    @Alias("用户年龄")
     private String patientAge;
 
     /**

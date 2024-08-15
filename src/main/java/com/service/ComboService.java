@@ -19,4 +19,5 @@ public interface ComboService {
     ResponseDTO editCombo(PhyCombo vo);
     ResponseDTO switchComboStatus(PhyCombo vo);
     ResponseDTO getAllComboNoPage();
+    ResponseDTO getAllComboWithStatus(int status);
 }

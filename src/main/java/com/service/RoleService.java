@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface RoleService {
     ResponseDTO getAllRole(PageVo vo);
+    ResponseDTO addRole(PhyRole vo);
 }

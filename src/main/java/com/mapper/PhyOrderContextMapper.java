@@ -2,6 +2,8 @@ package com.mapper;
 
 import com.pojo.PhyOrderContext;
 
+import java.util.List;
+
 /**
  * @author 李璟瑜
  * @date 2024/8/14 9:54
@@ -19,4 +21,5 @@ public interface PhyOrderContextMapper {
     int updateByPrimaryKeySelective(PhyOrderContext record);
 
     int updateByPrimaryKey(PhyOrderContext record);
+    List<PhyOrderContext> getContextListByOrderNumber(String number);
 }

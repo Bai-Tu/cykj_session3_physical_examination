@@ -138,4 +138,18 @@
             WHERE phy_project_subitem_connect.project_id = #{projectId}
         )
     </select>
+
+    <select id="getAllSubitemNoVoWithStatus" resultMap="BaseResultMap">
+        select * from phy_subitem where subitem_status = 1
+    </select>
+
+    <select id="getDiffSubitemWithStatus" resultMap="BaseResultMap">
+        select phy_subitem.*
+        FROM phy_subitem
+        WHERE phy_subitem.subitem_id NOT IN (
+        SELECT phy_project_subitem_connect.subitem_id FROM phy_project_subitem_connect
+        WHERE phy_project_subitem_connect.project_id = #{projectId}
+        )
+        and phy_subitem.subitem_status = #{status}
+    </select>
 </mapper>

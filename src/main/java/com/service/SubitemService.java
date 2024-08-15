@@ -1,5 +1,6 @@
 package com.service;
 
+import com.pojo.PhyProject;
 import com.pojo.PhySubitem;
 import com.util.ResponseDTO;
 import com.vo.PageVo;
@@ -18,4 +19,6 @@ public interface SubitemService {
     ResponseDTO editSubitemStatus(PhySubitem subitem);
     ResponseDTO getAllSubitemNoVo();
     ResponseDTO getDiffSubitem(int projectId);
+    ResponseDTO getAllSubitemNoVoWithStatus(int status);
+    ResponseDTO getDiffSubitemWithStatus(PhyProject vo);
 }

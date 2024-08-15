@@ -24,6 +24,7 @@ public interface PhyComboMapper {
     int updateByPrimaryKey(PhyCombo record);
 
     List<PhyCombo> getAllCombo();
+    List<PhyCombo> getAllComboWithStatus(int status);
 
     List<PhyCombo> searchCombo(SearchPageVo vo);
 }

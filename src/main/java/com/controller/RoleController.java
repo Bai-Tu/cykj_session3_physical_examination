@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.pojo.PhyRole;
 import com.service.RoleService;
 import com.util.ResponseDTO;
 import com.vo.PageVo;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/role")
 public class RoleController {
     @Autowired
-    private RoleService service;
+    RoleService service;
 
     @ResponseBody
     @RequestMapping("/getAllRole")
@@ -26,4 +27,12 @@ public class RoleController {
         ResponseDTO responseDTO = service.getAllRole(vo);
         return responseDTO;
     }
+
+    @ResponseBody
+    @RequestMapping("/addRole")
+    public ResponseDTO addRole(@RequestBody PhyRole vo){
+        ResponseDTO responseDTO = service.addRole(vo);
+        return responseDTO;
+    }
+
 }

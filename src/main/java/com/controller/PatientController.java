@@ -1,5 +1,7 @@
 package com.controller;
 
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
 import com.pojo.PhyPatient;
 import com.service.PatientService;
 import com.util.CheckCode;
@@ -12,16 +14,17 @@ import com.vo.RegisterVo;
 import com.vo.SearchPageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 李璟瑜
@@ -82,7 +85,6 @@ public class PatientController {
     @ResponseBody
     @RequestMapping("/addPatient")
     public ResponseDTO addPatient(@RequestBody PhyPatient vo){
-        vo.setPatientPassword("e10adc3949ba59abbe56e057f20f883e");
         ResponseDTO responseDTO = service.addPatient(vo);
         return responseDTO;
     }
@@ -99,6 +101,37 @@ public class PatientController {
     public ResponseDTO searchPatient(@RequestBody SearchPageVo vo){
         ResponseDTO responseDTO = service.searchPatient(vo);
         return responseDTO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/uploadExcel")
+    public ResponseDTO uploadExcel(@RequestParam("file") MultipartFile file){
+        try{
+            InputStream inputStream = file.getInputStream();
+            ExcelReader reader = ExcelUtil.getReader(inputStream);
+
+            List<Map<String, Object>> maps = reader.readAll();
+            for (Map<String, Object> row : maps) {
+                if (row.get("patientName").equals("用户昵称")){
+                    continue;
+                }
+                PhyPatient patient = new PhyPatient();
+
+                patient.setPatientName((String)row.get("patientName"));
+                patient.setPatientPhone((String) row.get("patientPhone"));
+                patient.setPatientIdentity((String)row.get("patientIdentity"));
+                patient.setPatientAge((String)row.get("patientAge"));
+
+                System.out.println(row);
+                service.addPatient(patient);
+            }
+
+            reader.close();
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return ResponseDTO.fail(e.getMessage());
+        }
+        return ResponseDTO.success();
     }
 
 }

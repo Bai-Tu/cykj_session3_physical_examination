@@ -32,6 +32,9 @@ public class ResponseDTO {
     public static ResponseDTO fail(){
         return new ResponseDTO(-1,"失败",null);
     }
+    public static ResponseDTO fail(Object context){
+        return new ResponseDTO(-1,"失败",context);
+    }
 
 
 }

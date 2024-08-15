@@ -128,4 +128,8 @@
       where combo_id = #{comboId}
     )
   </select>
+
+  <select id="getAllProjectWithStatus" resultMap="BaseResultMap">
+    select * from phy_project where project_status = #{status}
+  </select>
 </mapper>
