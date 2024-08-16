@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +108,7 @@ public class PatientController {
     @RequestMapping("/uploadExcel")
     public ResponseDTO uploadExcel(@RequestParam("file") MultipartFile file){
         try{
+            List<String> failNames = new ArrayList<>();
             InputStream inputStream = file.getInputStream();
             ExcelReader reader = ExcelUtil.getReader(inputStream);
 
@@ -117,21 +119,26 @@ public class PatientController {
                 }
                 PhyPatient patient = new PhyPatient();
 
-                patient.setPatientName((String)row.get("patientName"));
-                patient.setPatientPhone((String) row.get("patientPhone"));
-                patient.setPatientIdentity((String)row.get("patientIdentity"));
-                patient.setPatientAge((String)row.get("patientAge"));
+                patient.setPatientName(String.valueOf(row.get("patientName")));
+                patient.setPatientPhone(String.valueOf(row.get("patientPhone")));
+                patient.setPatientIdentity(String.valueOf(row.get("patientIdentity")));
+                patient.setPatientAge(String.valueOf(row.get("patientAge")));
 
                 System.out.println(row);
-                service.addPatient(patient);
-            }
+                ResponseDTO responseDTO = service.addPatient(patient);
+                if (responseDTO.getCode() == -2){
+                    failNames.add(patient.getPatientName());
+                }
 
+            }
             reader.close();
+            return ResponseDTO.success(failNames);
+
         } catch(Exception e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
             return ResponseDTO.fail(e.getMessage());
         }
-        return ResponseDTO.success();
     }
 
 }

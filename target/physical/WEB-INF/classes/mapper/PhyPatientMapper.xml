@@ -191,4 +191,9 @@
   <update id="checkOutOrder">
     update phy_patient set patient_buddget = patient_buddget - #{price,jdbcType=DECIMAL} where patient_id = #{id}
   </update>
+
+  <select id="myInsertPatient" resultType="int">
+    insert into phy_patient(patient_name,patient_phone,patient_identity,patient_password,patient_age)
+    values (#{patientName,jdbcType=VARCHAR},#{patientPhone,jdbcType=VARCHAR},#{patientIdentity,jdbcType=VARCHAR},#{patientPassword,jdbcType=VARCHAR},#{patientAge,jdbcType=VARCHAR})
+  </select>
 </mapper>

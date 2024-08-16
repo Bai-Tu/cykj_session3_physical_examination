@@ -45,4 +45,6 @@ public interface PhyPatientMapper {
     Integer addBudget(PhyPatient vo);
     List<PhyPatient> searchPatient(SearchPageVo vo);
     int checkOutOrder(@Param("id") int id, @Param("price")BigDecimal price);
+
+    int myInsertPatient(PhyPatient patient);
 }
